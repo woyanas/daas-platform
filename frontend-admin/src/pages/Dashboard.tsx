@@ -1,15 +1,10 @@
-import { Users, LayoutDashboard, TrendingUp, Activity } from 'lucide-react';
+import { useState, useEffect } from 'react';
+import { Users, LayoutDashboard, TrendingUp, Activity, Loader } from 'lucide-react';
 import {
     LineChart, Line, AreaChart, Area, BarChart, Bar,
     XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer
 } from 'recharts';
-
-const stats = [
-    { label: 'Total Users', value: '2,543', change: '+12%', icon: Users, color: 'primary' },
-    { label: 'Dashboards', value: '1,234', change: '+8%', icon: LayoutDashboard, color: 'green' },
-    { label: 'API Calls', value: '45.2K', change: '+23%', icon: Activity, color: 'blue' },
-    { label: 'Growth', value: '+18.2%', change: '+2%', icon: TrendingUp, color: 'purple' },
-];
+import { dashboardsApi, usersApi } from '../services/api';
 
 const chartData = [
     { name: 'Jan', users: 400, revenue: 2400, api: 2400 },
@@ -22,13 +17,50 @@ const chartData = [
 ];
 
 const recentActivity = [
+    { user: 'Admin User', action: 'System check', time: 'Just now' },
     { user: 'John Doe', action: 'Created new dashboard', time: '2 min ago' },
     { user: 'Sarah Chen', action: 'Updated user role', time: '15 min ago' },
     { user: 'Mike Wilson', action: 'Exported analytics report', time: '1 hour ago' },
-    { user: 'Emily Brown', action: 'Added new widget', time: '3 hours ago' },
 ];
 
 export default function Dashboard() {
+    const [analytics, setAnalytics] = useState<any>(null);
+    const [userStats, setUserStats] = useState<any>(null);
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        const fetchAnalytics = async () => {
+            try {
+                const [dashRes, userRes] = await Promise.all([
+                    dashboardsApi.getAnalytics().catch(() => ({ data: { totalDashboards: 0 } })),
+                    usersApi.getStats().catch(() => ({ data: { total: 0 } }))
+                ]);
+                setAnalytics(dashRes.data);
+                setUserStats(userRes.data);
+            } catch (error) {
+                console.error("Error fetching dashboard data:", error);
+            } finally {
+                setLoading(false);
+            }
+        };
+        fetchAnalytics();
+    }, []);
+
+    const stats = [
+        { label: 'Total Users', value: userStats?.total?.toLocaleString() || '0', change: '+12%', icon: Users, color: 'primary' },
+        { label: 'Dashboards', value: analytics?.totalDashboards?.toLocaleString() || '0', change: '+8%', icon: LayoutDashboard, color: 'green' },
+        { label: 'API Calls', value: '45.2K', change: '+23%', icon: Activity, color: 'blue' },
+        { label: 'Growth', value: '+18.2%', change: '+2%', icon: TrendingUp, color: 'purple' },
+    ];
+
+    if (loading) {
+        return (
+            <div className="flex bg-dark-900 justify-center items-center h-64">
+                <Loader className="w-8 h-8 text-primary-500 animate-spin" />
+            </div>
+        );
+    }
+
     return (
         <div className="space-y-6">
             {/* Stats Grid */}
