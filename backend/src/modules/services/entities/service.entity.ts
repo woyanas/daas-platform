@@ -1,64 +1,72 @@
-import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, ManyToOne, JoinColumn } from 'typeorm';
-import { User } from '../../users/entities/user.entity';
+import {
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  CreateDateColumn,
+  UpdateDateColumn,
+  ManyToOne,
+  JoinColumn,
+} from "typeorm";
+import { User } from "../../users/entities/user.entity";
 
-@Entity('services')
+@Entity("services")
 export class Service {
-    @PrimaryGeneratedColumn('uuid')
-    id: string;
+  @PrimaryGeneratedColumn("uuid")
+  id: string;
 
-    @Column()
-    name: string;
+  @Column()
+  name: string;
 
-    @Column({ unique: true })
-    slug: string;
+  @Column({ unique: true })
+  slug: string;
 
-    @Column({ nullable: true })
-    description: string;
+  @Column({ nullable: true })
+  description: string;
 
-    @Column({ nullable: true })
-    icon: string;
+  @Column({ nullable: true })
+  icon: string;
 
-    @Column({ name: 'is_active', default: true })
-    isActive: boolean;
+  @Column({ name: "is_active", default: true })
+  isActive: boolean;
 
-    @Column({ name: 'sort_order', default: 0 })
-    sortOrder: number;
+  @Column({ name: "sort_order", default: 0 })
+  sortOrder: number;
 
-    @CreateDateColumn({ name: 'created_at', type: 'timestamptz' })
-    createdAt: Date;
+  @CreateDateColumn({ name: "created_at", type: "timestamptz" })
+  createdAt: Date;
 
-    @UpdateDateColumn({ name: 'updated_at', type: 'timestamptz' })
-    updatedAt: Date;
+  @UpdateDateColumn({ name: "updated_at", type: "timestamptz" })
+  updatedAt: Date;
 }
 
-@Entity('service_configs')
+@Entity("service_configs")
 export class ServiceConfig {
-    @PrimaryGeneratedColumn('uuid')
-    id: string;
+  @PrimaryGeneratedColumn("uuid")
+  id: string;
 
-    @Column({ name: 'service_id' })
-    serviceId: string;
+  @Column({ name: "service_id" })
+  serviceId: string;
 
-    @ManyToOne(() => Service, { onDelete: 'CASCADE' })
-    @JoinColumn({ name: 'service_id' })
-    service: Service;
+  @ManyToOne(() => Service, { onDelete: "CASCADE" })
+  @JoinColumn({ name: "service_id" })
+  service: Service;
 
-    @Column({ name: 'user_id' })
-    userId: string;
+  @Column({ name: "user_id" })
+  userId: string;
 
-    @ManyToOne(() => User, { onDelete: 'CASCADE' })
-    @JoinColumn({ name: 'user_id' })
-    user: User;
+  @ManyToOne(() => User, { onDelete: "CASCADE" })
+  @JoinColumn({ name: "user_id" })
+  user: User;
 
-    @Column({ name: 'is_enabled', default: true })
-    isEnabled: boolean;
+  @Column({ name: "is_enabled", default: true })
+  isEnabled: boolean;
 
-    @Column({ type: 'jsonb', default: {} })
-    settings: Record<string, any>;
+  @Column({ type: "jsonb", default: {} })
+  settings: Record<string, any>;
 
-    @CreateDateColumn({ name: 'created_at', type: 'timestamptz' })
-    createdAt: Date;
+  @CreateDateColumn({ name: "created_at", type: "timestamptz" })
+  createdAt: Date;
 
-    @UpdateDateColumn({ name: 'updated_at', type: 'timestamptz' })
-    updatedAt: Date;
+  @UpdateDateColumn({ name: "updated_at", type: "timestamptz" })
+  updatedAt: Date;
 }
