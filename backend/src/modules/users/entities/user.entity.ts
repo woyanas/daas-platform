@@ -19,14 +19,14 @@ export class User {
   @PrimaryGeneratedColumn("uuid")
   id: string;
 
-  @Column({ unique: true })
+  @Column({ unique: true, length: 255 })
   email: string;
 
-  @Column({ name: "password_hash" })
+  @Column({ name: "password_hash", length: 255 })
   @Exclude()
   passwordHash: string;
 
-  @Column({ name: "full_name" })
+  @Column({ name: "full_name", length: 255 })
   fullName: string;
 
   @Column({ type: "enum", enum: UserRole, default: UserRole.VIEWER })
@@ -35,7 +35,7 @@ export class User {
   @Column({ name: "is_active", default: true })
   isActive: boolean;
 
-  @Column({ name: "avatar_url", nullable: true })
+  @Column({ name: "avatar_url", nullable: true, length: 500 })
   avatarUrl: string;
 
   @Column({ name: "last_login_at", type: "timestamptz", nullable: true })
