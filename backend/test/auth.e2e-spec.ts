@@ -30,7 +30,7 @@ describe("Auth (e2e)", () => {
           fullName: "Test User",
         })
         .expect(201)
-        .expect((res) => {
+        .expect((res: request.Response) => {
           expect(res.body).toHaveProperty("accessToken");
           expect(res.body).toHaveProperty("refreshToken");
           expect(res.body).toHaveProperty("user");
@@ -77,7 +77,7 @@ describe("Auth (e2e)", () => {
       return request(app.getHttpServer())
         .get("/health")
         .expect(200)
-        .expect((res) => {
+        .expect((res: request.Response) => {
           expect(res.body.status).toBe("ok");
           expect(res.body).toHaveProperty("timestamp");
         });
