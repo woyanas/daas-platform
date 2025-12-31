@@ -10,19 +10,19 @@ export class ContactSubmission {
   @PrimaryGeneratedColumn("uuid")
   id: string;
 
-  @Column()
+  @Column({ length: 255 })
   name: string;
 
-  @Column()
+  @Column({ length: 255 })
   email: string;
 
-  @Column({ nullable: true })
+  @Column({ nullable: true, length: 50 })
   phone: string;
 
-  @Column({ nullable: true })
+  @Column({ nullable: true, length: 255 })
   company: string;
 
-  @Column({ nullable: true })
+  @Column({ nullable: true, length: 255 })
   subject: string;
 
   @Column({ type: "text" })

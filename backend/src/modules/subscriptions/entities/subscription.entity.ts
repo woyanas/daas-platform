@@ -14,19 +14,19 @@ export class Plan {
   @PrimaryGeneratedColumn("uuid")
   id: string;
 
-  @Column()
+  @Column({ length: 100 })
   name: string;
 
-  @Column({ unique: true })
+  @Column({ unique: true, length: 50 })
   slug: string;
 
-  @Column({ nullable: true })
+  @Column({ nullable: true, type: 'text' })
   description: string;
 
   @Column({ type: "decimal", precision: 10, scale: 2, default: 0 })
   price: number;
 
-  @Column({ name: "billing_cycle", default: "monthly" })
+  @Column({ name: "billing_cycle", default: "monthly", length: 20 })
   billingCycle: string;
 
   @Column({ type: "jsonb", default: [] })
@@ -113,7 +113,7 @@ export class UsageMetric {
   @JoinColumn({ name: "user_id" })
   user: User;
 
-  @Column({ name: "metric_type" })
+  @Column({ name: "metric_type", length: 50 })
   metricType: string;
 
   @Column({ type: "decimal", precision: 15, scale: 4 })
