@@ -1,0 +1,84 @@
+version: '3.8'
+
+services:
+  # PostgreSQL Database
+  postgres:
+    image: postgres:16-alpine
+    container_name: daas-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: daas_user
+      POSTGRES_PASSWORD: daas_password
+      POSTGRES_DB: daas_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./database/migrations:/docker-entrypoint-initdb.d:ro
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U daas_user -d daas_db" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - daas-network
+
+  # NestJS Backend API
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: daas-backend
+    restart: unless-stopped
+    environment:
+      NODE_ENV: production
+      PORT: 3000
+      DATABASE_HOST: postgres
+      DATABASE_PORT: 5432
+      DATABASE_USER: daas_user
+      DATABASE_PASSWORD: daas_password
+      DATABASE_NAME: daas_db
+      JWT_SECRET: your-super-secret-jwt-key-change-in-production
+      CORS_ORIGIN: http://localhost:3001,http://localhost:3002
+    ports:
+      - "3000:3000"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - daas-network
+
+  # Company Profile Web
+  frontend-web:
+    build:
+      context: ./frontend-web
+      dockerfile: Dockerfile
+    container_name: daas-frontend-web
+    restart: unless-stopped
+    ports:
+      - "3001:80"
+    depends_on:
+      - backend
+    networks:
+      - daas-network
+
+  # Admin Dashboard
+  frontend-admin:
+    build:
+      context: ./frontend-admin
+      dockerfile: Dockerfile
+    container_name: daas-frontend-admin
+    restart: unless-stopped
+    ports:
+      - "3002:80"
+    depends_on:
+      - backend
+    networks:
+      - daas-network
+
+networks:
+  daas-network:
+    driver: bridge
+
+volumes:
+  postgres_data:

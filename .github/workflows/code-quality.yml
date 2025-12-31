@@ -1,0 +1,50 @@
+name: Code Quality
+
+on:
+  pull_request:
+    branches: [main, develop]
+
+jobs:
+  code-quality:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      # Backend Quality
+      - name: Install backend dependencies
+        run: cd backend && npm ci
+
+      - name: Lint backend
+        run: cd backend && npm run lint
+
+      - name: Check backend types
+        run: cd backend && npx tsc --noEmit
+
+      # Frontend Web Quality
+      - name: Install frontend-web dependencies
+        run: cd frontend-web && npm ci
+
+      - name: Lint frontend-web
+        run: cd frontend-web && npm run lint
+
+      # Frontend Admin Quality
+      - name: Install frontend-admin dependencies
+        run: cd frontend-admin && npm ci
+
+      - name: Lint frontend-admin
+        run: cd frontend-admin && npm run lint
+
+      # Security Audit
+      - name: Security audit
+        run: |
+          cd backend && npm audit --audit-level=high || true
+          cd ../frontend-web && npm audit --audit-level=high || true
+          cd ../frontend-admin && npm audit --audit-level=high || true

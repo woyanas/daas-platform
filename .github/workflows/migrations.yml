@@ -1,0 +1,26 @@
+name: Database Migrations
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'database/migrations/**'
+
+jobs:
+  migrate:
+    runs-on: ubuntu-latest
+    environment: production
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Run migrations
+        run: |
+          echo "Running database migrations..."
+          # Example migration command:
+          # psql $DATABASE_URL -f database/migrations/*.sql
+          
+          # Or using a migration tool:
+          # npm run typeorm migration:run
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}

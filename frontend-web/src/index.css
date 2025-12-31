@@ -1,0 +1,59 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  body {
+    @apply bg-dark-950 text-dark-100 font-sans antialiased;
+  }
+
+  ::selection {
+    @apply bg-primary-500/30;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply inline-flex items-center justify-center px-6 py-3 text-sm font-semibold text-white 
+           bg-gradient-to-r from-primary-600 to-primary-500 rounded-lg
+           hover:from-primary-500 hover:to-primary-400 
+           transition-all duration-300 ease-out
+           shadow-lg shadow-primary-500/25 hover:shadow-xl hover:shadow-primary-500/30
+           hover:-translate-y-0.5;
+  }
+
+  .btn-secondary {
+    @apply inline-flex items-center justify-center px-6 py-3 text-sm font-semibold 
+           text-dark-100 bg-dark-800/50 border border-dark-700 rounded-lg
+           hover:bg-dark-700/50 hover:border-dark-600
+           transition-all duration-300 ease-out;
+  }
+
+  .card {
+    @apply bg-dark-900/50 backdrop-blur-sm border border-dark-800 rounded-2xl p-6
+           hover:border-dark-700 transition-all duration-300;
+  }
+
+  .section-title {
+    @apply text-3xl md:text-4xl lg:text-5xl font-bold 
+           bg-gradient-to-r from-white to-dark-300 bg-clip-text text-transparent;
+  }
+
+  .gradient-text {
+    @apply bg-gradient-to-r from-primary-400 to-primary-300 bg-clip-text text-transparent;
+  }
+
+  .glass {
+    @apply bg-dark-900/30 backdrop-blur-xl border border-dark-800/50;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
