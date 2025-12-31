@@ -14,16 +14,16 @@ export class Service {
   @PrimaryGeneratedColumn("uuid")
   id: string;
 
-  @Column()
+  @Column({ length: 100 })
   name: string;
 
-  @Column({ unique: true })
+  @Column({ unique: true, length: 50 })
   slug: string;
 
-  @Column({ nullable: true })
+  @Column({ nullable: true, type: 'text' })
   description: string;
 
-  @Column({ nullable: true })
+  @Column({ nullable: true, length: 100 })
   icon: string;
 
   @Column({ name: "is_active", default: true })

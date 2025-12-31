@@ -22,10 +22,10 @@ export class Dashboard {
   @JoinColumn({ name: "user_id" })
   user: User;
 
-  @Column()
+  @Column({ length: 255 })
   name: string;
 
-  @Column({ nullable: true })
+  @Column({ nullable: true, type: 'text' })
   description: string;
 
   @Column({ type: "jsonb", default: { columns: 12, rows: [] } })
@@ -37,7 +37,7 @@ export class Dashboard {
   @Column({ name: "is_default", default: false })
   isDefault: boolean;
 
-  @Column({ name: "thumbnail_url", nullable: true })
+  @Column({ name: "thumbnail_url", nullable: true, length: 500 })
   thumbnailUrl: string;
 
   @CreateDateColumn({ name: "created_at", type: "timestamptz" })
@@ -78,7 +78,7 @@ export class Widget {
   @Column({ type: "enum", enum: WidgetType })
   type: WidgetType;
 
-  @Column()
+  @Column({ length: 255 })
   title: string;
 
   @Column({ type: "jsonb", default: {} })
