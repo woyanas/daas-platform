@@ -23,4 +23,4 @@ CREATE INDEX idx_users_role ON users(role);
 
 -- Insert default admin user (password: admin123 - bcrypt hashed)
 INSERT INTO users (email, password_hash, full_name, role) VALUES 
-('admin@daas.local', '$2b$10$rQZ8K.u1qXzQxK.u1qXzQeK.u1qXzQxK.u1qXzQxK.u1qXzQxK.u1', 'System Admin', 'admin');
+('admin@daas.local', '$2b$10$29FxhzeM/1UnH//E2TZgn.1pFpUZF1SNoDlvSNorPCBu0JiWttLC6', 'System Admin', 'admin');
