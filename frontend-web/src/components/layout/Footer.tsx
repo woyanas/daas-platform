@@ -38,11 +38,10 @@ export default function Footer() {
                             <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-primary-500 to-primary-600 flex items-center justify-center">
                                 <LayoutDashboard className="w-5 h-5 text-white" />
                             </div>
-                            <span className="text-xl font-bold text-white">DaaS</span>
+                            <span className="text-xl font-bold text-white">Canasfee</span>
                         </Link>
                         <p className="text-dark-400 text-sm mb-6">
-                            Build stunning dashboards with ease. Enterprise-grade analytics and
-                            visualization for your business.
+                            Leading provider of data analytics solutions and software. Transform your data into actionable insights with our advanced analytics platform.
                         </p>
                         <div className="flex gap-4">
                             <a href="#" className="text-dark-400 hover:text-white transition-colors">
@@ -126,7 +125,7 @@ export default function Footer() {
                 {/* Bottom */}
                 <div className="mt-16 pt-8 border-t border-dark-800 flex flex-col md:flex-row items-center justify-between gap-4">
                     <p className="text-sm text-dark-500">
-                        © {new Date().getFullYear()} DaaS Platform. All rights reserved.
+                        © {new Date().getFullYear()} Canasfee. All rights reserved.
                     </p>
                     <p className="text-sm text-dark-500">
                         Made with ❤️ for developers and businesses

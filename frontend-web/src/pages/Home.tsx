@@ -9,39 +9,39 @@ import {
 const features = [
     {
         icon: BarChart3,
-        title: 'Advanced Analytics',
-        description: 'Real-time insights with beautiful charts and comprehensive reporting.',
+        title: 'Big Data Analytics',
+        description: 'Process and analyze massive datasets with our high-performance analytics engine.',
     },
     {
         icon: Layers,
-        title: 'Drag & Drop Builder',
-        description: 'Create stunning dashboards in minutes with our intuitive builder.',
+        title: 'Time-Series Intelligence',
+        description: 'Specialized time-series database for industrial IoT and real-time monitoring.',
     },
     {
         icon: Zap,
-        title: 'Lightning Fast',
-        description: 'Optimized for performance with instant data updates and smooth interactions.',
+        title: 'Real-Time Processing',
+        description: 'Millisecond-level analytics with stream processing for instant insights.',
     },
     {
         icon: Shield,
-        title: 'Enterprise Security',
-        description: 'Bank-grade security with SOC 2 compliance and data encryption.',
+        title: 'AI-Powered Insights',
+        description: 'Machine learning and AI agents for predictive analytics and anomaly detection.',
     },
 ];
 
 const stats = [
-    { value: '10K+', label: 'Active Users' },
-    { value: '500M+', label: 'Data Points' },
-    { value: '99.9%', label: 'Uptime' },
-    { value: '24/7', label: 'Support' },
+    { value: '500+', label: 'Enterprise Clients' },
+    { value: '10B+', label: 'Data Points Processed' },
+    { value: '99.9%', label: 'Uptime SLA' },
+    { value: '24/7', label: 'Expert Support' },
 ];
 
 export default function Home() {
     return (
         <>
             <Helmet>
-                <title>DaaS Platform - Dashboard as a Service</title>
-                <meta name="description" content="Build stunning dashboards with ease. Enterprise-grade analytics and visualization for your business." />
+                <title>Canasfee - Data Analytics Solutions & Software</title>
+                <meta name="description" content="Transform your data into actionable insights with Canasfee's advanced Big Data Analytics, Time-Series Intelligence, and AI-powered solutions." />
             </Helmet>
 
             {/* Hero Section */}
@@ -59,18 +59,18 @@ export default function Home() {
                     >
                         <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary-500/10 border border-primary-500/20 text-primary-400 text-sm mb-8">
                             <Zap className="w-4 h-4" />
-                            <span>New: Real-time collaboration features</span>
+                            <span>New: AI-Powered Predictive Analytics</span>
                         </div>
 
                         <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-white mb-6 leading-tight">
-                            Build Dashboards
+                            AI-Driven Data Platform
                             <br />
-                            <span className="gradient-text">That Impress</span>
+                            <span className="gradient-text">For Industrial IoT</span>
                         </h1>
 
                         <p className="text-lg md:text-xl text-dark-300 max-w-2xl mx-auto mb-10">
-                            Create beautiful, real-time dashboards in minutes.
-                            Enterprise-grade analytics for teams of all sizes.
+                            Transform massive amounts of industrial data into real-time insights.
+                            High-performance time-series analytics with AI-powered intelligence.
                         </p>
 
                         <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
@@ -132,10 +132,10 @@ export default function Home() {
             <section className="py-24">
                 <div className="max-w-7xl mx-auto px-6">
                     <div className="text-center mb-16">
-                        <h2 className="section-title mb-4">Everything You Need</h2>
+                        <h2 className="section-title mb-4">Why Choose Canasfee?</h2>
                         <p className="text-dark-400 max-w-2xl mx-auto">
-                            Powerful features to help you build, analyze, and share
-                            dashboards that drive business decisions.
+                            Leading-edge data analytics solutions designed for modern industrial enterprises.
+                            From raw data to real-time intelligence in one platform.
                         </p>
                     </div>
 
@@ -164,10 +164,10 @@ export default function Home() {
             <section className="py-24">
                 <div className="max-w-4xl mx-auto px-6">
                     <div className="card bg-gradient-to-br from-primary-900/30 to-dark-900/50 border-primary-500/20 text-center py-16">
-                        <h2 className="section-title mb-4">Ready to Get Started?</h2>
+                        <h2 className="section-title mb-4">Ready to Transform Your Data?</h2>
                         <p className="text-dark-300 mb-8 max-w-xl mx-auto">
-                            Join thousands of companies using DaaS to power their analytics.
-                            Start your free trial today.
+                            Join 500+ industrial companies using Canasfee to unlock the true value of their time-series data.
+                            Request a demo or start your free trial today.
                         </p>
                         <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
                             <a href="http://localhost:3002/register" className="btn-primary">
