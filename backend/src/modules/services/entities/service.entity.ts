@@ -20,7 +20,7 @@ export class Service {
   @Column({ unique: true, length: 50 })
   slug: string;
 
-  @Column({ nullable: true, type: 'text' })
+  @Column({ nullable: true, type: "text" })
   description: string;
 
   @Column({ nullable: true, length: 100 })
