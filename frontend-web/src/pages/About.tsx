@@ -1,6 +1,6 @@
 import { Helmet } from 'react-helmet-async';
 import { motion } from 'framer-motion';
-import { Target, Heart, Lightbulb, Award, Users, Globe } from 'lucide-react';
+import { Target, Heart, Lightbulb, Award } from 'lucide-react';
 
 const values = [
     {

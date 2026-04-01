@@ -2,8 +2,7 @@ import { Helmet } from 'react-helmet-async';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import {
-    ArrowRight, BarChart3, Layers, Zap, Shield,
-    Users, Globe, CheckCircle2
+    ArrowRight, BarChart3, Layers, Zap, Shield
 } from 'lucide-react';
 
 const features = [

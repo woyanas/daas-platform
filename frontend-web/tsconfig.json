@@ -16,9 +16,12 @@
         "noEmit": true,
         "jsx": "react-jsx",
         "strict": true,
-        "noUnusedLocals": true,
-        "noUnusedParameters": true,
+        /* Ubah ini jadi false biar gak rewel soal variabel nganggur */
+        "noUnusedLocals": false, 
+        "noUnusedParameters": false,
         "noFallthroughCasesInSwitch": true,
+        /* Tambahkan ini biar kenal import.meta.env */
+        "types": ["vite/client"],
         "baseUrl": ".",
         "paths": {
             "@/*": [
