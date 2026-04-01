@@ -26,7 +26,7 @@ export default function Register() {
                 {/* Logo */}
                 <div className="text-center mb-8">
                     <div className="inline-flex items-center gap-2 mb-4">
-                        <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-primary-500 to-primary-600 flex items-center justify-center">
+                        <div className="w-12 h-12 rounded-xl bg-primary-600 flex items-center justify-center">
                             <LayoutDashboard className="w-6 h-6 text-white" />
                         </div>
                     </div>

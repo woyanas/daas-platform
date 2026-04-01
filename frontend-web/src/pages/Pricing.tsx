@@ -1,5 +1,4 @@
 import { Helmet } from 'react-helmet-async';
-import { motion } from 'framer-motion';
 import { Check, X, Zap } from 'lucide-react';
 
 const plans = [
@@ -81,34 +80,27 @@ export default function Pricing() {
             </Helmet>
 
             {/* Hero */}
-            <section className="pt-32 pb-20">
+            <section className="pt-32 pb-20 bg-dark-950">
                 <div className="max-w-7xl mx-auto px-6">
-                    <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        className="text-center"
-                    >
-                        <h1 className="section-title mb-6">Simple, Transparent Pricing</h1>
+                    <div className="text-center">
+                        <h1 className="text-4xl md:text-5xl font-bold text-white mb-6">Simple, Transparent Pricing</h1>
                         <p className="text-xl text-dark-300 max-w-2xl mx-auto">
                             Start free and scale as you grow. No hidden fees.
                         </p>
-                    </motion.div>
+                    </div>
                 </div>
             </section>
 
             {/* Pricing Cards */}
-            <section className="pb-24">
+            <section className="pb-24 bg-dark-950">
                 <div className="max-w-6xl mx-auto px-6">
                     <div className="grid md:grid-cols-3 gap-8">
-                        {plans.map((plan, index) => (
-                            <motion.div
+                        {plans.map((plan) => (
+                            <div
                                 key={plan.name}
-                                initial={{ opacity: 0, y: 20 }}
-                                animate={{ opacity: 1, y: 0 }}
-                                transition={{ delay: index * 0.1 }}
-                                className={`card relative ${plan.popular
-                                        ? 'border-primary-500/50 bg-gradient-to-b from-primary-900/20 to-dark-900/50'
-                                        : ''
+                                className={`p-8 rounded-2xl border relative ${plan.popular
+                                        ? 'border-primary-500 bg-dark-900'
+                                        : 'border-dark-800 bg-dark-900'
                                     }`}
                             >
                                 {plan.popular && (
@@ -130,7 +122,7 @@ export default function Pricing() {
                                     {plan.features.map((feature) => (
                                         <li key={feature.name} className="flex items-center gap-3">
                                             {feature.included ? (
-                                                <Check className="w-5 h-5 text-primary-400 shrink-0" />
+                                                <Check className="w-5 h-5 text-primary-500 shrink-0" />
                                             ) : (
                                                 <X className="w-5 h-5 text-dark-600 shrink-0" />
                                             )}
@@ -143,33 +135,29 @@ export default function Pricing() {
 
                                 <a
                                     href="http://localhost:3002/register"
-                                    className={`w-full ${plan.popular ? 'btn-primary' : 'btn-secondary'}`}
+                                    className={`w-full block text-center py-2 px-4 rounded-lg font-medium transition-colors ${plan.popular ? 'bg-primary-600 hover:bg-primary-700 text-white' : 'bg-dark-800 hover:bg-dark-700 text-white'}`}
                                 >
                                     {plan.cta}
                                 </a>
-                            </motion.div>
+                            </div>
                         ))}
                     </div>
                 </div>
             </section>
 
             {/* FAQ */}
-            <section className="py-24 bg-dark-900/30">
+            <section className="py-24 bg-dark-950">
                 <div className="max-w-3xl mx-auto px-6">
-                    <h2 className="section-title text-center mb-12">Frequently Asked Questions</h2>
+                    <h2 className="text-3xl font-bold text-center text-white mb-12">Frequently Asked Questions</h2>
                     <div className="space-y-4">
                         {faqs.map((faq, index) => (
-                            <motion.div
+                            <div
                                 key={index}
-                                initial={{ opacity: 0, y: 10 }}
-                                whileInView={{ opacity: 1, y: 0 }}
-                                transition={{ delay: index * 0.1 }}
-                                viewport={{ once: true }}
-                                className="card"
+                                className="p-6 rounded-2xl border border-dark-800 bg-dark-900"
                             >
                                 <h3 className="text-lg font-semibold text-white mb-2">{faq.question}</h3>
                                 <p className="text-dark-400">{faq.answer}</p>
-                            </motion.div>
+                            </div>
                         ))}
                     </div>
                 </div>
