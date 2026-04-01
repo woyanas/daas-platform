@@ -20,7 +20,7 @@ export class Plan {
   @Column({ unique: true, length: 50 })
   slug: string;
 
-  @Column({ nullable: true, type: 'text' })
+  @Column({ nullable: true, type: "text" })
   description: string;
 
   @Column({ type: "decimal", precision: 10, scale: 2, default: 0 })

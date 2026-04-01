@@ -79,9 +79,7 @@ export class AuthService {
     return this.generateTokens(user);
   }
 
-  async refreshTokens(refreshToken: string): Promise<AuthResponseDto> {
-    const tokenHash = await bcrypt.hash(refreshToken, 10);
-
+  async refreshTokens(_refreshToken: string): Promise<AuthResponseDto> {
     // Find the token record (simplified - in production, compare hash properly)
     const storedToken = await this.refreshTokensRepository.findOne({
       where: { isRevoked: false },

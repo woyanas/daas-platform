@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { User, Lock, Bell, Palette } from 'lucide-react';
+import { User, Lock, Bell } from 'lucide-react';
 import { useAuthStore } from '../store/authStore';
 
 export default function Settings() {

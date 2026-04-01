@@ -25,7 +25,7 @@ export class Dashboard {
   @Column({ length: 255 })
   name: string;
 
-  @Column({ nullable: true, type: 'text' })
+  @Column({ nullable: true, type: "text" })
   description: string;
 
   @Column({ type: "jsonb", default: { columns: 12, rows: [] } })
