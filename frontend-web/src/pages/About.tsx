@@ -1,5 +1,4 @@
 import { Helmet } from 'react-helmet-async';
-import { motion } from 'framer-motion';
 import { Target, Heart, Lightbulb, Award } from 'lucide-react';
 
 const values = [
@@ -36,47 +35,39 @@ export default function About() {
     return (
         <>
             <Helmet>
-                <title>About Us - DaaS Platform</title>
-                <meta name="description" content="Learn about DaaS Platform, our mission to democratize data analytics, and the team behind the product." />
+                <title>About Us - Platform</title>
+                <meta name="description" content="Learn about our Platform, our mission to democratize data analytics, and the team behind the product." />
             </Helmet>
 
             {/* Hero */}
             <section className="pt-32 pb-20">
                 <div className="max-w-7xl mx-auto px-6">
-                    <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        className="text-center"
-                    >
-                        <h1 className="section-title mb-6">About DaaS Platform</h1>
-                        <p className="text-xl text-dark-300 max-w-3xl mx-auto">
+                    <div className="text-center">
+                        <h1 className="text-3xl md:text-4xl font-bold text-dark-900 dark:text-white mb-6">About Our Platform 🎯</h1>
+                        <p className="text-xl text-dark-600 dark:text-dark-300 max-w-3xl mx-auto">
                             We're on a mission to make data analytics accessible to everyone.
                             Founded in 2023, we've helped thousands of companies make better
                             decisions with beautiful, intuitive dashboards.
                         </p>
-                    </motion.div>
+                    </div>
                 </div>
             </section>
 
             {/* Story */}
-            <section className="py-20 bg-dark-900/30">
+            <section className="py-20 bg-dark-50 dark:bg-dark-900">
                 <div className="max-w-7xl mx-auto px-6">
                     <div className="grid lg:grid-cols-2 gap-12 items-center">
-                        <motion.div
-                            initial={{ opacity: 0, x: -20 }}
-                            whileInView={{ opacity: 1, x: 0 }}
-                            viewport={{ once: true }}
-                        >
-                            <h2 className="text-3xl font-bold text-white mb-6">Our Story</h2>
-                            <div className="space-y-4 text-dark-300">
+                        <div>
+                            <h2 className="text-3xl font-bold text-dark-900 dark:text-white mb-6">Our Story 📖</h2>
+                            <div className="space-y-4 text-dark-600 dark:text-dark-300">
                                 <p>
-                                    DaaS was born from frustration. As data engineers and analysts,
+                                    Our platform was born from frustration. As data engineers and analysts,
                                     we spent countless hours wrestling with complex BI tools that
                                     were expensive, hard to use, and slow.
                                 </p>
                                 <p>
-                                    We knew there had to be a better way. So we built DaaS – a
-                                    platform that combines the power of enterprise analytics with
+                                    We knew there had to be a better way. So we built this platform – a
+                                    solution that combines the power of enterprise analytics with
                                     the simplicity of modern design.
                                 </p>
                                 <p>
@@ -84,31 +75,26 @@ export default function About() {
                                     from startups to Fortune 500 enterprises.
                                 </p>
                             </div>
-                        </motion.div>
+                        </div>
 
-                        <motion.div
-                            initial={{ opacity: 0, x: 20 }}
-                            whileInView={{ opacity: 1, x: 0 }}
-                            viewport={{ once: true }}
-                            className="grid grid-cols-2 gap-4"
-                        >
-                            <div className="card text-center">
-                                <div className="text-4xl font-bold gradient-text">2023</div>
-                                <div className="text-dark-400 text-sm">Founded</div>
+                        <div className="grid grid-cols-2 gap-4">
+                            <div className="card bg-white dark:bg-dark-950 border border-dark-200 dark:border-dark-800 text-center rounded-2xl p-6">
+                                <div className="text-4xl font-bold text-primary-600 dark:text-primary-400">2023</div>
+                                <div className="text-dark-600 dark:text-dark-400 text-sm">Founded</div>
                             </div>
-                            <div className="card text-center">
-                                <div className="text-4xl font-bold gradient-text">50+</div>
-                                <div className="text-dark-400 text-sm">Team Members</div>
+                            <div className="card bg-white dark:bg-dark-950 border border-dark-200 dark:border-dark-800 text-center rounded-2xl p-6">
+                                <div className="text-4xl font-bold text-primary-600 dark:text-primary-400">50+</div>
+                                <div className="text-dark-600 dark:text-dark-400 text-sm">Team Members</div>
                             </div>
-                            <div className="card text-center">
-                                <div className="text-4xl font-bold gradient-text">10K+</div>
-                                <div className="text-dark-400 text-sm">Customers</div>
+                            <div className="card bg-white dark:bg-dark-950 border border-dark-200 dark:border-dark-800 text-center rounded-2xl p-6">
+                                <div className="text-4xl font-bold text-primary-600 dark:text-primary-400">10K+</div>
+                                <div className="text-dark-600 dark:text-dark-400 text-sm">Customers</div>
                             </div>
-                            <div className="card text-center">
-                                <div className="text-4xl font-bold gradient-text">$15M</div>
-                                <div className="text-dark-400 text-sm">Funded</div>
+                            <div className="card bg-white dark:bg-dark-950 border border-dark-200 dark:border-dark-800 text-center rounded-2xl p-6">
+                                <div className="text-4xl font-bold text-primary-600 dark:text-primary-400">$15M</div>
+                                <div className="text-dark-600 dark:text-dark-400 text-sm">Funded</div>
                             </div>
-                        </motion.div>
+                        </div>
                     </div>
                 </div>
             </section>
@@ -117,59 +103,51 @@ export default function About() {
             <section className="py-20">
                 <div className="max-w-7xl mx-auto px-6">
                     <div className="text-center mb-16">
-                        <h2 className="section-title mb-4">Our Values</h2>
-                        <p className="text-dark-400 max-w-2xl mx-auto">
+                        <h2 className="text-3xl md:text-4xl font-bold text-dark-900 dark:text-white mb-4">Our Values 🌟</h2>
+                        <p className="text-dark-600 dark:text-dark-400 max-w-2xl mx-auto">
                             The principles that guide everything we do.
                         </p>
                     </div>
 
                     <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-                        {values.map((value, index) => (
-                            <motion.div
+                        {values.map((value) => (
+                            <div
                                 key={value.title}
-                                initial={{ opacity: 0, y: 20 }}
-                                whileInView={{ opacity: 1, y: 0 }}
-                                transition={{ delay: index * 0.1 }}
-                                viewport={{ once: true }}
-                                className="card text-center"
+                                className="card bg-white dark:bg-dark-900 border border-dark-200 dark:border-dark-800 text-center rounded-2xl p-6"
                             >
-                                <div className="w-14 h-14 rounded-xl bg-primary-500/10 flex items-center justify-center mx-auto mb-4">
-                                    <value.icon className="w-7 h-7 text-primary-400" />
+                                <div className="w-14 h-14 rounded-xl bg-primary-100 dark:bg-primary-900 flex items-center justify-center mx-auto mb-4">
+                                    <value.icon className="w-7 h-7 text-primary-600 dark:text-primary-400" />
                                 </div>
-                                <h3 className="text-lg font-semibold text-white mb-2">{value.title}</h3>
-                                <p className="text-dark-400 text-sm">{value.description}</p>
-                            </motion.div>
+                                <h3 className="text-lg font-semibold text-dark-900 dark:text-white mb-2">{value.title}</h3>
+                                <p className="text-dark-600 dark:text-dark-400 text-sm">{value.description}</p>
+                            </div>
                         ))}
                     </div>
                 </div>
             </section>
 
             {/* Team */}
-            <section className="py-20 bg-dark-900/30">
+            <section className="py-20 bg-dark-50 dark:bg-dark-900">
                 <div className="max-w-7xl mx-auto px-6">
                     <div className="text-center mb-16">
-                        <h2 className="section-title mb-4">Meet Our Team</h2>
-                        <p className="text-dark-400 max-w-2xl mx-auto">
-                            The talented people behind DaaS Platform.
+                        <h2 className="text-3xl md:text-4xl font-bold text-dark-900 dark:text-white mb-4">Meet Our Team 👥</h2>
+                        <p className="text-dark-600 dark:text-dark-400 max-w-2xl mx-auto">
+                            The talented people behind our platform.
                         </p>
                     </div>
 
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-                        {team.map((member, index) => (
-                            <motion.div
+                        {team.map((member) => (
+                            <div
                                 key={member.name}
-                                initial={{ opacity: 0, y: 20 }}
-                                whileInView={{ opacity: 1, y: 0 }}
-                                transition={{ delay: index * 0.1 }}
-                                viewport={{ once: true }}
-                                className="card text-center"
+                                className="card bg-white dark:bg-dark-950 border border-dark-200 dark:border-dark-800 text-center rounded-2xl p-6"
                             >
-                                <div className="w-20 h-20 rounded-full bg-gradient-to-br from-primary-500 to-primary-600 flex items-center justify-center mx-auto mb-4 text-2xl font-bold text-white">
+                                <div className="w-20 h-20 rounded-full bg-primary-600 flex items-center justify-center mx-auto mb-4 text-2xl font-bold text-white">
                                     {member.avatar}
                                 </div>
-                                <h3 className="font-semibold text-white">{member.name}</h3>
-                                <p className="text-dark-400 text-sm">{member.role}</p>
-                            </motion.div>
+                                <h3 className="font-semibold text-dark-900 dark:text-white">{member.name}</h3>
+                                <p className="text-dark-600 dark:text-dark-400 text-sm">{member.role}</p>
+                            </div>
                         ))}
                     </div>
                 </div>

@@ -1,5 +1,4 @@
 import { Helmet } from 'react-helmet-async';
-import { motion } from 'framer-motion';
 import {
     BarChart3, LineChart, PieChart, Table2, Gauge,
     Layers, Zap, Shield, Database, Cloud, Workflow, Globe
@@ -57,45 +56,37 @@ export default function Services() {
     return (
         <>
             <Helmet>
-                <title>Services & Features - DaaS Platform</title>
-                <meta name="description" content="Explore DaaS Platform features: analytics dashboards, data connectors, enterprise security, and more." />
+                <title>Services & Features - Platform</title>
+                <meta name="description" content="Explore Platform features: analytics dashboards, data connectors, enterprise security, and more." />
             </Helmet>
 
             {/* Hero */}
             <section className="pt-32 pb-20">
                 <div className="max-w-7xl mx-auto px-6">
-                    <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        className="text-center"
-                    >
-                        <h1 className="section-title mb-6">Our Services</h1>
-                        <p className="text-xl text-dark-300 max-w-3xl mx-auto">
+                    <div className="text-center">
+                        <h1 className="text-3xl md:text-4xl font-bold text-dark-900 dark:text-white mb-6">Our Services 🛠️</h1>
+                        <p className="text-xl text-dark-600 dark:text-dark-300 max-w-3xl mx-auto">
                             Everything you need to build, analyze, and share powerful
                             dashboards that drive business decisions.
                         </p>
-                    </motion.div>
+                    </div>
                 </div>
             </section>
 
             {/* Widget Types */}
-            <section className="py-16 bg-dark-900/30">
+            <section className="py-16 bg-dark-50 dark:bg-dark-900">
                 <div className="max-w-7xl mx-auto px-6">
-                    <h2 className="text-2xl font-bold text-white text-center mb-12">Widget Library</h2>
+                    <h2 className="text-2xl font-bold text-dark-900 dark:text-white text-center mb-12">Widget Library 📊</h2>
                     <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
-                        {widgets.map((widget, index) => (
-                            <motion.div
+                        {widgets.map((widget) => (
+                            <div
                                 key={widget.name}
-                                initial={{ opacity: 0, scale: 0.95 }}
-                                whileInView={{ opacity: 1, scale: 1 }}
-                                transition={{ delay: index * 0.05 }}
-                                viewport={{ once: true }}
-                                className="card text-center group hover:border-primary-500/30"
+                                className="card bg-white dark:bg-dark-950 border border-dark-200 dark:border-dark-800 text-center rounded-2xl p-4"
                             >
-                                <widget.icon className="w-8 h-8 text-primary-400 mx-auto mb-3" />
-                                <h3 className="text-sm font-semibold text-white">{widget.name}</h3>
-                                <p className="text-xs text-dark-400 mt-1">{widget.description}</p>
-                            </motion.div>
+                                <widget.icon className="w-8 h-8 text-primary-600 dark:text-primary-400 mx-auto mb-3" />
+                                <h3 className="text-sm font-semibold text-dark-900 dark:text-white">{widget.name}</h3>
+                                <p className="text-xs text-dark-600 dark:text-dark-400 mt-1">{widget.description}</p>
+                            </div>
                         ))}
                     </div>
                 </div>
@@ -105,29 +96,25 @@ export default function Services() {
             <section className="py-24">
                 <div className="max-w-7xl mx-auto px-6">
                     <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                        {services.map((service, index) => (
-                            <motion.div
+                        {services.map((service) => (
+                            <div
                                 key={service.title}
-                                initial={{ opacity: 0, y: 20 }}
-                                whileInView={{ opacity: 1, y: 0 }}
-                                transition={{ delay: index * 0.1 }}
-                                viewport={{ once: true }}
-                                className="card group hover:border-primary-500/30"
+                                className="card bg-white dark:bg-dark-900 border border-dark-200 dark:border-dark-800 rounded-2xl p-6"
                             >
-                                <div className="w-14 h-14 rounded-xl bg-primary-500/10 flex items-center justify-center mb-6 group-hover:bg-primary-500/20 transition-colors">
-                                    <service.icon className="w-7 h-7 text-primary-400" />
+                                <div className="w-14 h-14 rounded-xl bg-primary-100 dark:bg-primary-900 flex items-center justify-center mb-6">
+                                    <service.icon className="w-7 h-7 text-primary-600 dark:text-primary-400" />
                                 </div>
-                                <h3 className="text-xl font-bold text-white mb-3">{service.title}</h3>
-                                <p className="text-dark-400 mb-6">{service.description}</p>
+                                <h3 className="text-xl font-bold text-dark-900 dark:text-white mb-3">{service.title}</h3>
+                                <p className="text-dark-600 dark:text-dark-400 mb-6">{service.description}</p>
                                 <ul className="space-y-2">
                                     {service.features.map((feature) => (
-                                        <li key={feature} className="flex items-center gap-2 text-sm text-dark-300">
-                                            <Zap className="w-4 h-4 text-primary-400" />
+                                        <li key={feature} className="flex items-center gap-2 text-sm text-dark-600 dark:text-dark-300">
+                                            <Zap className="w-4 h-4 text-primary-600 dark:text-primary-400" />
                                             {feature}
                                         </li>
                                     ))}
                                 </ul>
-                            </motion.div>
+                            </div>
                         ))}
                     </div>
                 </div>
