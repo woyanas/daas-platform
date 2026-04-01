@@ -55,8 +55,8 @@ export default function Dashboard() {
 
     if (loading) {
         return (
-            <div className="flex bg-dark-900 justify-center items-center h-64">
-                <Loader className="w-8 h-8 text-primary-500 animate-spin" />
+            <div className="flex bg-white dark:bg-dark-900 justify-center items-center h-64">
+                <Loader className="w-8 h-8 text-primary-600 dark:text-primary-500 animate-spin" />
             </div>
         );
     }
@@ -68,15 +68,15 @@ export default function Dashboard() {
                 {stats.map((stat) => (
                     <div key={stat.label} className="card">
                         <div className="flex items-center justify-between mb-4">
-                            <div className={`w-10 h-10 rounded-lg bg-${stat.color}-500/10 flex items-center justify-center`}>
-                                <stat.icon className={`w-5 h-5 text-${stat.color}-400`} />
+                            <div className={`w-10 h-10 rounded-lg bg-${stat.color}-100 dark:bg-${stat.color}-500/10 flex items-center justify-center`}>
+                                <stat.icon className={`w-5 h-5 text-${stat.color}-600 dark:text-${stat.color}-400`} />
                             </div>
-                            <span className="text-xs font-medium text-green-400 bg-green-500/10 px-2 py-1 rounded-full">
+                            <span className="text-xs font-medium text-green-700 dark:text-green-400 bg-green-100 dark:bg-green-500/10 px-2 py-1 rounded-full">
                                 {stat.change}
                             </span>
                         </div>
-                        <div className="text-2xl font-bold text-white">{stat.value}</div>
-                        <div className="text-sm text-dark-400">{stat.label}</div>
+                        <div className="text-2xl font-bold text-dark-900 dark:text-white">{stat.value}</div>
+                        <div className="text-sm text-dark-600 dark:text-dark-400">{stat.label}</div>
                     </div>
                 ))}
             </div>
@@ -85,31 +85,31 @@ export default function Dashboard() {
             <div className="grid lg:grid-cols-2 gap-6">
                 {/* User Growth Chart */}
                 <div className="card">
-                    <h3 className="text-lg font-semibold text-white mb-4">User Growth</h3>
+                    <h3 className="text-lg font-semibold text-dark-900 dark:text-white mb-4">User Growth</h3>
                     <div className="h-64">
                         <ResponsiveContainer width="100%" height="100%">
                             <AreaChart data={chartData}>
                                 <defs>
                                     <linearGradient id="colorUsers" x1="0" y1="0" x2="0" y2="1">
-                                        <stop offset="5%" stopColor="#6366f1" stopOpacity={0.3} />
-                                        <stop offset="95%" stopColor="#6366f1" stopOpacity={0} />
+                                        <stop offset="5%" stopColor="#4f46e5" stopOpacity={0.3} />
+                                        <stop offset="95%" stopColor="#4f46e5" stopOpacity={0} />
                                     </linearGradient>
                                 </defs>
-                                <CartesianGrid strokeDasharray="3 3" stroke="#334155" />
-                                <XAxis dataKey="name" stroke="#64748b" fontSize={12} />
-                                <YAxis stroke="#64748b" fontSize={12} />
+                                <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" strokeOpacity={0.5} vertical={false} />
+                                <XAxis dataKey="name" stroke="#64748b" fontSize={12} tickLine={false} axisLine={false} />
+                                <YAxis stroke="#64748b" fontSize={12} tickLine={false} axisLine={false} />
                                 <Tooltip
                                     contentStyle={{
-                                        backgroundColor: '#1e293b',
-                                        border: '1px solid #334155',
+                                        backgroundColor: '#ffffff',
+                                        border: '1px solid #e2e8f0',
                                         borderRadius: '8px',
-                                        color: '#f1f5f9'
+                                        color: '#0f172a'
                                     }}
                                 />
                                 <Area
                                     type="monotone"
                                     dataKey="users"
-                                    stroke="#6366f1"
+                                    stroke="#4f46e5"
                                     fillOpacity={1}
                                     fill="url(#colorUsers)"
                                 />
@@ -120,22 +120,22 @@ export default function Dashboard() {
 
                 {/* API Usage Chart */}
                 <div className="card">
-                    <h3 className="text-lg font-semibold text-white mb-4">API Usage</h3>
+                    <h3 className="text-lg font-semibold text-dark-900 dark:text-white mb-4">API Usage</h3>
                     <div className="h-64">
                         <ResponsiveContainer width="100%" height="100%">
                             <BarChart data={chartData}>
-                                <CartesianGrid strokeDasharray="3 3" stroke="#334155" />
-                                <XAxis dataKey="name" stroke="#64748b" fontSize={12} />
-                                <YAxis stroke="#64748b" fontSize={12} />
+                                <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" strokeOpacity={0.5} vertical={false} />
+                                <XAxis dataKey="name" stroke="#64748b" fontSize={12} tickLine={false} axisLine={false} />
+                                <YAxis stroke="#64748b" fontSize={12} tickLine={false} axisLine={false} />
                                 <Tooltip
                                     contentStyle={{
-                                        backgroundColor: '#1e293b',
-                                        border: '1px solid #334155',
+                                        backgroundColor: '#ffffff',
+                                        border: '1px solid #e2e8f0',
                                         borderRadius: '8px',
-                                        color: '#f1f5f9'
+                                        color: '#0f172a'
                                     }}
                                 />
-                                <Bar dataKey="api" fill="#6366f1" radius={[4, 4, 0, 0]} />
+                                <Bar dataKey="api" fill="#4f46e5" radius={[4, 4, 0, 0]} />
                             </BarChart>
                         </ResponsiveContainer>
                     </div>
@@ -144,16 +144,16 @@ export default function Dashboard() {
 
             {/* Recent Activity */}
             <div className="card">
-                <h3 className="text-lg font-semibold text-white mb-4">Recent Activity</h3>
+                <h3 className="text-lg font-semibold text-dark-900 dark:text-white mb-4">Recent Activity</h3>
                 <div className="space-y-4">
                     {recentActivity.map((activity, index) => (
-                        <div key={index} className="flex items-center gap-4 pb-4 border-b border-dark-800 last:border-0 last:pb-0">
+                        <div key={index} className="flex items-center gap-4 pb-4 border-b border-dark-200 dark:border-dark-800 last:border-0 last:pb-0">
                             <div className="w-10 h-10 rounded-full bg-primary-600 flex items-center justify-center text-white font-medium text-sm">
                                 {activity.user.charAt(0)}
                             </div>
                             <div className="flex-1">
-                                <div className="text-sm text-white font-medium">{activity.user}</div>
-                                <div className="text-sm text-dark-400">{activity.action}</div>
+                                <div className="text-sm text-dark-900 dark:text-white font-medium">{activity.user}</div>
+                                <div className="text-sm text-dark-600 dark:text-dark-400">{activity.action}</div>
                             </div>
                             <div className="text-xs text-dark-500">{activity.time}</div>
                         </div>

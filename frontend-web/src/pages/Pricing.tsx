@@ -1,5 +1,4 @@
 import { Helmet } from 'react-helmet-async';
-import { motion } from 'framer-motion';
 import { Check, X, Zap } from 'lucide-react';
 
 const plans = [
@@ -76,23 +75,19 @@ export default function Pricing() {
     return (
         <>
             <Helmet>
-                <title>Pricing - DaaS Platform</title>
+                <title>Pricing - Platform</title>
                 <meta name="description" content="Simple, transparent pricing for teams of all sizes. Start free and scale as you grow." />
             </Helmet>
 
             {/* Hero */}
             <section className="pt-32 pb-20">
                 <div className="max-w-7xl mx-auto px-6">
-                    <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        className="text-center"
-                    >
-                        <h1 className="section-title mb-6">Simple, Transparent Pricing</h1>
-                        <p className="text-xl text-dark-300 max-w-2xl mx-auto">
+                    <div className="text-center">
+                        <h1 className="text-3xl md:text-4xl font-bold text-dark-900 dark:text-white mb-6">Simple, Transparent Pricing 💳</h1>
+                        <p className="text-xl text-dark-600 dark:text-dark-300 max-w-2xl mx-auto">
                             Start free and scale as you grow. No hidden fees.
                         </p>
-                    </motion.div>
+                    </div>
                 </div>
             </section>
 
@@ -100,29 +95,26 @@ export default function Pricing() {
             <section className="pb-24">
                 <div className="max-w-6xl mx-auto px-6">
                     <div className="grid md:grid-cols-3 gap-8">
-                        {plans.map((plan, index) => (
-                            <motion.div
+                        {plans.map((plan) => (
+                            <div
                                 key={plan.name}
-                                initial={{ opacity: 0, y: 20 }}
-                                animate={{ opacity: 1, y: 0 }}
-                                transition={{ delay: index * 0.1 }}
-                                className={`card relative ${plan.popular
-                                        ? 'border-primary-500/50 bg-gradient-to-b from-primary-900/20 to-dark-900/50'
-                                        : ''
+                                className={`card relative bg-white dark:bg-dark-900 border rounded-2xl p-6 ${plan.popular
+                                        ? 'border-primary-500 shadow-md'
+                                        : 'border-dark-200 dark:border-dark-800'
                                     }`}
                             >
                                 {plan.popular && (
-                                    <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-1 bg-primary-500 rounded-full text-xs font-semibold text-white flex items-center gap-1">
+                                    <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-1 bg-primary-600 rounded-full text-xs font-semibold text-white flex items-center gap-1 shadow-sm">
                                         <Zap className="w-3 h-3" /> Most Popular
                                     </div>
                                 )}
 
                                 <div className="text-center mb-8">
-                                    <h3 className="text-xl font-bold text-white mb-2">{plan.name}</h3>
-                                    <p className="text-dark-400 text-sm mb-4">{plan.description}</p>
+                                    <h3 className="text-xl font-bold text-dark-900 dark:text-white mb-2">{plan.name}</h3>
+                                    <p className="text-dark-600 dark:text-dark-400 text-sm mb-4">{plan.description}</p>
                                     <div className="flex items-baseline justify-center gap-1">
-                                        <span className="text-5xl font-bold text-white">${plan.price}</span>
-                                        <span className="text-dark-400">/month</span>
+                                        <span className="text-5xl font-bold text-dark-900 dark:text-white">${plan.price}</span>
+                                        <span className="text-dark-600 dark:text-dark-400">/month</span>
                                     </div>
                                 </div>
 
@@ -130,11 +122,11 @@ export default function Pricing() {
                                     {plan.features.map((feature) => (
                                         <li key={feature.name} className="flex items-center gap-3">
                                             {feature.included ? (
-                                                <Check className="w-5 h-5 text-primary-400 shrink-0" />
+                                                <Check className="w-5 h-5 text-primary-600 dark:text-primary-400 shrink-0" />
                                             ) : (
-                                                <X className="w-5 h-5 text-dark-600 shrink-0" />
+                                                <X className="w-5 h-5 text-dark-300 dark:text-dark-600 shrink-0" />
                                             )}
-                                            <span className={feature.included ? 'text-dark-200' : 'text-dark-500'}>
+                                            <span className={feature.included ? 'text-dark-800 dark:text-dark-200' : 'text-dark-400 dark:text-dark-500'}>
                                                 {feature.name}
                                             </span>
                                         </li>
@@ -143,33 +135,29 @@ export default function Pricing() {
 
                                 <a
                                     href="http://localhost:3002/register"
-                                    className={`w-full ${plan.popular ? 'btn-primary' : 'btn-secondary'}`}
+                                    className={`w-full block text-center ${plan.popular ? 'btn-primary' : 'btn-secondary'}`}
                                 >
                                     {plan.cta}
                                 </a>
-                            </motion.div>
+                            </div>
                         ))}
                     </div>
                 </div>
             </section>
 
             {/* FAQ */}
-            <section className="py-24 bg-dark-900/30">
+            <section className="py-24 bg-dark-50 dark:bg-dark-900">
                 <div className="max-w-3xl mx-auto px-6">
-                    <h2 className="section-title text-center mb-12">Frequently Asked Questions</h2>
+                    <h2 className="text-3xl md:text-4xl font-bold text-dark-900 dark:text-white text-center mb-12">Frequently Asked Questions ❓</h2>
                     <div className="space-y-4">
                         {faqs.map((faq, index) => (
-                            <motion.div
+                            <div
                                 key={index}
-                                initial={{ opacity: 0, y: 10 }}
-                                whileInView={{ opacity: 1, y: 0 }}
-                                transition={{ delay: index * 0.1 }}
-                                viewport={{ once: true }}
-                                className="card"
+                                className="card bg-white dark:bg-dark-950 border border-dark-200 dark:border-dark-800 rounded-2xl p-6"
                             >
-                                <h3 className="text-lg font-semibold text-white mb-2">{faq.question}</h3>
-                                <p className="text-dark-400">{faq.answer}</p>
-                            </motion.div>
+                                <h3 className="text-lg font-semibold text-dark-900 dark:text-white mb-2">{faq.question}</h3>
+                                <p className="text-dark-600 dark:text-dark-400">{faq.answer}</p>
+                            </div>
                         ))}
                     </div>
                 </div>
