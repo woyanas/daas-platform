@@ -1,8 +1,11 @@
-import { Injectable, NotFoundException } from "@nestjs/common";
+import { Injectable, NotFoundException, BadRequestException } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
+import * as bcrypt from "bcrypt";
 import { User, UserRole } from "./entities/user.entity";
 import { UpdateUserDto } from "./dto/update-user.dto";
+import { CreateUserDto } from "./dto/create-user.dto";
+import { ChangePasswordDto } from "./dto/change-password.dto";
 
 @Injectable()
 export class UsersService {
@@ -37,6 +40,28 @@ export class UsersService {
     return user;
   }
 
+  async create(dto: CreateUserDto): Promise<User> {
+    const existingUser = await this.usersRepository.findOne({
+      where: { email: dto.email },
+    });
+
+    if (existingUser) {
+      throw new BadRequestException("Email already registered");
+    }
+
+    const passwordHash = await bcrypt.hash(dto.password, 10);
+
+    const user = this.usersRepository.create({
+      email: dto.email,
+      passwordHash,
+      fullName: dto.fullName,
+      role: dto.role || UserRole.VIEWER,
+      isActive: true,
+    });
+
+    return this.usersRepository.save(user);
+  }
+
   async update(id: string, dto: UpdateUserDto): Promise<User> {
     const user = await this.findOne(id);
     Object.assign(user, dto);
@@ -52,6 +77,23 @@ export class UsersService {
   async deactivate(id: string): Promise<void> {
     const user = await this.findOne(id);
     user.isActive = false;
+    await this.usersRepository.save(user);
+  }
+
+  async changePassword(id: string, dto: ChangePasswordDto): Promise<void> {
+    const user = await this.findOne(id);
+
+    const isPasswordValid = await bcrypt.compare(dto.currentPassword, user.passwordHash);
+    if (!isPasswordValid) {
+      throw new BadRequestException("Current password is incorrect");
+    }
+
+    if (dto.newPassword !== dto.confirmPassword) {
+      throw new BadRequestException("Passwords do not match");
+    }
+
+    const passwordHash = await bcrypt.hash(dto.newPassword, 10);
+    user.passwordHash = passwordHash;
     await this.usersRepository.save(user);
   }
 

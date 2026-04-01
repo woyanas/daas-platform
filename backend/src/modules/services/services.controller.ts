@@ -45,4 +45,14 @@ export class ServicesController {
   ) {
     return this.servicesService.updateConfig(req.user.id, id, body);
   }
+
+  @Patch(":id")
+  @ApiOperation({ summary: "Toggle service for user" })
+  toggleService(
+    @Param("id") id: string,
+    @Body() body: { isEnabled?: boolean },
+    @Req() req: any,
+  ) {
+    return this.servicesService.updateConfig(req.user.id, id, body);
+  }
 }

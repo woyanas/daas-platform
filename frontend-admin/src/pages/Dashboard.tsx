@@ -5,6 +5,7 @@ import {
     XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer
 } from 'recharts';
 import { dashboardsApi, usersApi } from '../services/api';
+import { useThemeStore } from '../store/themeStore';
 
 const chartData = [
     { name: 'Jan', users: 400, revenue: 2400, api: 2400 },
@@ -17,16 +18,17 @@ const chartData = [
 ];
 
 const recentActivity = [
-    { user: 'Admin User', action: 'System check', time: 'Just now' },
-    { user: 'John Doe', action: 'Created new dashboard', time: '2 min ago' },
-    { user: 'Sarah Chen', action: 'Updated user role', time: '15 min ago' },
-    { user: 'Mike Wilson', action: 'Exported analytics report', time: '1 hour ago' },
+    { user: 'Admin User', action: '✅ System check', time: 'Just now', emoji: '⚙️' },
+    { user: 'John Doe', action: '📊 Created new dashboard', time: '2 min ago', emoji: '📊' },
+    { user: 'Sarah Chen', action: '👤 Updated user role', time: '15 min ago', emoji: '👤' },
+    { user: 'Mike Wilson', action: '📥 Exported analytics report', time: '1 hour ago', emoji: '📥' },
 ];
 
 export default function Dashboard() {
     const [analytics, setAnalytics] = useState<any>(null);
     const [userStats, setUserStats] = useState<any>(null);
     const [loading, setLoading] = useState(true);
+    const { isDark } = useThemeStore();
 
     useEffect(() => {
         const fetchAnalytics = async () => {
@@ -47,16 +49,16 @@ export default function Dashboard() {
     }, []);
 
     const stats = [
-        { label: 'Total Users', value: userStats?.total?.toLocaleString() || '0', change: '+12%', icon: Users, color: 'primary' },
-        { label: 'Dashboards', value: analytics?.totalDashboards?.toLocaleString() || '0', change: '+8%', icon: LayoutDashboard, color: 'green' },
-        { label: 'API Calls', value: '45.2K', change: '+23%', icon: Activity, color: 'blue' },
-        { label: 'Growth', value: '+18.2%', change: '+2%', icon: TrendingUp, color: 'purple' },
+        { label: '👥 Total Users', value: userStats?.total?.toLocaleString() || '0', change: '+12%', icon: Users, color: 'primary' },
+        { label: '📊 Dashboards', value: analytics?.totalDashboards?.toLocaleString() || '0', change: '+8%', icon: LayoutDashboard, color: 'green' },
+        { label: '⚡ API Calls', value: '45.2K', change: '+23%', icon: Activity, color: 'blue' },
+        { label: '📈 Growth', value: '+18.2%', change: '+2%', icon: TrendingUp, color: 'purple' },
     ];
 
     if (loading) {
         return (
-            <div className="flex bg-white dark:bg-dark-900 justify-center items-center h-64">
-                <Loader className="w-8 h-8 text-primary-600 dark:text-primary-500 animate-spin" />
+            <div className={`flex justify-center items-center h-64 transition-colors ${isDark ? 'bg-dark-900' : 'bg-white'}`}>
+                <Loader className={`w-8 h-8 animate-spin ${isDark ? 'text-primary-500' : 'text-blue-500'}`} />
             </div>
         );
     }
@@ -66,17 +68,35 @@ export default function Dashboard() {
             {/* Stats Grid */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
                 {stats.map((stat) => (
-                    <div key={stat.label} className="card">
+                    <div key={stat.label} className={`rounded-lg p-6 transition-colors ${
+                        isDark
+                            ? 'bg-dark-800 border border-dark-700'
+                            : 'bg-white border border-gray-200 shadow-sm'
+                    }`}>
                         <div className="flex items-center justify-between mb-4">
-                            <div className={`w-10 h-10 rounded-lg bg-${stat.color}-100 dark:bg-${stat.color}-500/10 flex items-center justify-center`}>
-                                <stat.icon className={`w-5 h-5 text-${stat.color}-600 dark:text-${stat.color}-400`} />
+                            <div className={`w-10 h-10 rounded-lg flex items-center justify-center ${
+                                isDark
+                                    ? 'bg-primary-500/10'
+                                    : 'bg-blue-100'
+                            }`}>
+                                <stat.icon className={`w-5 h-5 ${
+                                    isDark ? 'text-primary-400' : 'text-blue-600'
+                                }`} />
                             </div>
-                            <span className="text-xs font-medium text-green-700 dark:text-green-400 bg-green-100 dark:bg-green-500/10 px-2 py-1 rounded-full">
+                            <span className={`text-xs font-medium px-2 py-1 rounded-full ${
+                                isDark
+                                    ? 'text-green-400 bg-green-500/10'
+                                    : 'text-green-700 bg-green-100'
+                            }`}>
                                 {stat.change}
                             </span>
                         </div>
-                        <div className="text-2xl font-bold text-dark-900 dark:text-white">{stat.value}</div>
-                        <div className="text-sm text-dark-600 dark:text-dark-400">{stat.label}</div>
+                        <div className={`text-2xl font-bold ${isDark ? 'text-white' : 'text-gray-900'}`}>
+                            {stat.value}
+                        </div>
+                        <div className={`text-sm ${isDark ? 'text-dark-400' : 'text-gray-600'}`}>
+                            {stat.label}
+                        </div>
                     </div>
                 ))}
             </div>
@@ -84,32 +104,38 @@ export default function Dashboard() {
             {/* Charts Row */}
             <div className="grid lg:grid-cols-2 gap-6">
                 {/* User Growth Chart */}
-                <div className="card">
-                    <h3 className="text-lg font-semibold text-dark-900 dark:text-white mb-4">User Growth</h3>
+                <div className={`rounded-lg p-6 transition-colors ${
+                    isDark
+                        ? 'bg-dark-800 border border-dark-700'
+                        : 'bg-white border border-gray-200 shadow-sm'
+                }`}>
+                    <h3 className={`text-lg font-semibold mb-4 ${isDark ? 'text-white' : 'text-gray-900'}`}>
+                        📊 User Growth
+                    </h3>
                     <div className="h-64">
                         <ResponsiveContainer width="100%" height="100%">
                             <AreaChart data={chartData}>
                                 <defs>
                                     <linearGradient id="colorUsers" x1="0" y1="0" x2="0" y2="1">
-                                        <stop offset="5%" stopColor="#4f46e5" stopOpacity={0.3} />
-                                        <stop offset="95%" stopColor="#4f46e5" stopOpacity={0} />
+                                        <stop offset="5%" stopColor={isDark ? '#4f46e5' : '#3b82f6'} stopOpacity={0.3} />
+                                        <stop offset="95%" stopColor={isDark ? '#4f46e5' : '#3b82f6'} stopOpacity={0} />
                                     </linearGradient>
                                 </defs>
-                                <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" strokeOpacity={0.5} vertical={false} />
-                                <XAxis dataKey="name" stroke="#64748b" fontSize={12} tickLine={false} axisLine={false} />
-                                <YAxis stroke="#64748b" fontSize={12} tickLine={false} axisLine={false} />
+                                <CartesianGrid strokeDasharray="3 3" stroke={isDark ? '#334155' : '#e5e7eb'} strokeOpacity={0.5} vertical={false} />
+                                <XAxis dataKey="name" stroke={isDark ? '#64748b' : '#9ca3af'} fontSize={12} tickLine={false} axisLine={false} />
+                                <YAxis stroke={isDark ? '#64748b' : '#9ca3af'} fontSize={12} tickLine={false} axisLine={false} />
                                 <Tooltip
                                     contentStyle={{
-                                        backgroundColor: '#ffffff',
-                                        border: '1px solid #e2e8f0',
+                                        backgroundColor: isDark ? '#1e293b' : '#ffffff',
+                                        border: isDark ? '1px solid #334155' : '1px solid #e5e7eb',
                                         borderRadius: '8px',
-                                        color: '#0f172a'
+                                        color: isDark ? '#f1f5f9' : '#0f172a'
                                     }}
                                 />
                                 <Area
                                     type="monotone"
                                     dataKey="users"
-                                    stroke="#4f46e5"
+                                    stroke={isDark ? '#4f46e5' : '#3b82f6'}
                                     fillOpacity={1}
                                     fill="url(#colorUsers)"
                                 />
@@ -119,23 +145,29 @@ export default function Dashboard() {
                 </div>
 
                 {/* API Usage Chart */}
-                <div className="card">
-                    <h3 className="text-lg font-semibold text-dark-900 dark:text-white mb-4">API Usage</h3>
+                <div className={`rounded-lg p-6 transition-colors ${
+                    isDark
+                        ? 'bg-dark-800 border border-dark-700'
+                        : 'bg-white border border-gray-200 shadow-sm'
+                }`}>
+                    <h3 className={`text-lg font-semibold mb-4 ${isDark ? 'text-white' : 'text-gray-900'}`}>
+                        ⚡ API Usage
+                    </h3>
                     <div className="h-64">
                         <ResponsiveContainer width="100%" height="100%">
                             <BarChart data={chartData}>
-                                <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" strokeOpacity={0.5} vertical={false} />
-                                <XAxis dataKey="name" stroke="#64748b" fontSize={12} tickLine={false} axisLine={false} />
-                                <YAxis stroke="#64748b" fontSize={12} tickLine={false} axisLine={false} />
+                                <CartesianGrid strokeDasharray="3 3" stroke={isDark ? '#334155' : '#e5e7eb'} strokeOpacity={0.5} vertical={false} />
+                                <XAxis dataKey="name" stroke={isDark ? '#64748b' : '#9ca3af'} fontSize={12} tickLine={false} axisLine={false} />
+                                <YAxis stroke={isDark ? '#64748b' : '#9ca3af'} fontSize={12} tickLine={false} axisLine={false} />
                                 <Tooltip
                                     contentStyle={{
-                                        backgroundColor: '#ffffff',
-                                        border: '1px solid #e2e8f0',
+                                        backgroundColor: isDark ? '#1e293b' : '#ffffff',
+                                        border: isDark ? '1px solid #334155' : '1px solid #e5e7eb',
                                         borderRadius: '8px',
-                                        color: '#0f172a'
+                                        color: isDark ? '#f1f5f9' : '#0f172a'
                                     }}
                                 />
-                                <Bar dataKey="api" fill="#4f46e5" radius={[4, 4, 0, 0]} />
+                                <Bar dataKey="api" fill={isDark ? '#4f46e5' : '#3b82f6'} radius={[4, 4, 0, 0]} />
                             </BarChart>
                         </ResponsiveContainer>
                     </div>
@@ -143,19 +175,37 @@ export default function Dashboard() {
             </div>
 
             {/* Recent Activity */}
-            <div className="card">
-                <h3 className="text-lg font-semibold text-dark-900 dark:text-white mb-4">Recent Activity</h3>
+            <div className={`rounded-lg p-6 transition-colors ${
+                isDark
+                    ? 'bg-dark-800 border border-dark-700'
+                    : 'bg-white border border-gray-200 shadow-sm'
+            }`}>
+                <h3 className={`text-lg font-semibold mb-4 ${isDark ? 'text-white' : 'text-gray-900'}`}>
+                    🕐 Recent Activity
+                </h3>
                 <div className="space-y-4">
                     {recentActivity.map((activity, index) => (
-                        <div key={index} className="flex items-center gap-4 pb-4 border-b border-dark-200 dark:border-dark-800 last:border-0 last:pb-0">
-                            <div className="w-10 h-10 rounded-full bg-primary-600 flex items-center justify-center text-white font-medium text-sm">
-                                {activity.user.charAt(0)}
+                        <div key={index} className={`flex items-center gap-4 pb-4 last:border-0 last:pb-0 border-b transition-colors ${
+                            isDark ? 'border-dark-700' : 'border-gray-200'
+                        }`}>
+                            <div className={`w-10 h-10 rounded-full flex items-center justify-center text-white font-medium text-sm ${
+                                isDark
+                                    ? 'bg-primary-600'
+                                    : 'bg-gradient-to-br from-blue-500 to-purple-500'
+                            }`}>
+                                {activity.emoji}
                             </div>
                             <div className="flex-1">
-                                <div className="text-sm text-dark-900 dark:text-white font-medium">{activity.user}</div>
-                                <div className="text-sm text-dark-600 dark:text-dark-400">{activity.action}</div>
+                                <div className={`text-sm font-medium ${isDark ? 'text-white' : 'text-gray-900'}`}>
+                                    {activity.user}
+                                </div>
+                                <div className={`text-sm ${isDark ? 'text-dark-400' : 'text-gray-600'}`}>
+                                    {activity.action}
+                                </div>
                             </div>
-                            <div className="text-xs text-dark-500">{activity.time}</div>
+                            <div className={`text-xs ${isDark ? 'text-dark-500' : 'text-gray-500'}`}>
+                                ⏰ {activity.time}
+                            </div>
                         </div>
                     ))}
                 </div>

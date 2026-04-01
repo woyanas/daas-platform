@@ -1,5 +1,7 @@
-import { Routes, Route, Navigate } from 'react-router-dom';
+import { Routes, Route, Navigate, useLocation } from 'react-router-dom';
+import { useEffect } from 'react';
 import { useAuthStore } from './store/authStore';
+import { useThemeStore } from './store/themeStore';
 import Layout from './components/layout/Layout';
 import Login from './pages/auth/Login';
 import Register from './pages/auth/Register';
@@ -19,7 +21,7 @@ function ProtectedRoute({ children }: { children: React.ReactNode }) {
     return <>{children}</>;
 }
 
-function App() {
+function AppContent() {
     return (
         <Routes>
             {/* Public routes */}
@@ -43,6 +45,21 @@ function App() {
             </Route>
         </Routes>
     );
+}
+
+function App() {
+    const isDark = useThemeStore((state) => state.isDark);
+
+    useEffect(() => {
+        const htmlElement = document.documentElement;
+        if (isDark) {
+            htmlElement.classList.add('dark');
+        } else {
+            htmlElement.classList.remove('dark');
+        }
+    }, [isDark]);
+
+    return <AppContent />;
 }
 
 export default App;

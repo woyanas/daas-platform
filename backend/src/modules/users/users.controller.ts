@@ -1,6 +1,7 @@
 import {
   Controller,
   Get,
+  Post,
   Patch,
   Delete,
   Param,
@@ -17,6 +18,8 @@ import {
 } from "@nestjs/swagger";
 import { UsersService } from "./users.service";
 import { UpdateUserDto } from "./dto/update-user.dto";
+import { CreateUserDto } from "./dto/create-user.dto";
+import { ChangePasswordDto } from "./dto/change-password.dto";
 import { JwtAuthGuard } from "../auth/guards/jwt-auth.guard";
 import { RolesGuard } from "../auth/guards/roles.guard";
 import { Roles } from "../auth/decorators/roles.decorator";
@@ -28,6 +31,14 @@ import { UserRole } from "./entities/user.entity";
 @ApiBearerAuth()
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
+
+  @Post()
+  @UseGuards(RolesGuard)
+  @Roles(UserRole.ADMIN)
+  @ApiOperation({ summary: "Create new user (Admin only)" })
+  create(@Body() dto: CreateUserDto) {
+    return this.usersService.create(dto);
+  }
 
   @Get()
   @UseGuards(RolesGuard)
@@ -65,6 +76,12 @@ export class UsersController {
   @ApiOperation({ summary: "Update current user profile" })
   updateProfile(@Req() req: any, @Body() dto: UpdateUserDto) {
     return this.usersService.update(req.user.id, dto);
+  }
+
+  @Patch("me/password")
+  @ApiOperation({ summary: "Change current user password" })
+  changePassword(@Req() req: any, @Body() dto: ChangePasswordDto) {
+    return this.usersService.changePassword(req.user.id, dto);
   }
 
   @Patch(":id/role")

@@ -28,7 +28,9 @@ export const usersApi = {
     getAll: (page = 1, limit = 10) => api.get(`/users?page=${page}&limit=${limit}`),
     getStats: () => api.get('/users/stats'),
     getMe: () => api.get('/users/me'),
+    create: (data: { email: string; password: string; fullName: string; role?: string }) => api.post('/users', data),
     updateMe: (data: { fullName?: string }) => api.patch('/users/me', data),
+    changePassword: (data: { currentPassword: string; newPassword: string; confirmPassword: string }) => api.patch('/users/me/password', data),
     updateRole: (id: string, role: string) => api.patch(`/users/${id}/role`, { role }),
     delete: (id: string) => api.delete(`/users/${id}`),
 };
@@ -45,6 +47,7 @@ export const servicesApi = {
     getAll: () => api.get('/services'),
     getMyConfig: () => api.get('/services/my-config'),
     updateConfig: (id: string, data: any) => api.patch(`/services/${id}/config`, data),
+    toggle: (id: string, isEnabled: boolean) => api.patch(`/services/${id}`, { isEnabled }),
 };
 
 export const subscriptionsApi = {
