@@ -5,6 +5,7 @@ import About from './pages/About';
 import Services from './pages/Services';
 import Pricing from './pages/Pricing';
 import Contact from './pages/Contact';
+import NotFound from './pages/NotFound';
 
 function App() {
     return (
@@ -16,6 +17,8 @@ function App() {
                 <Route path="pricing" element={<Pricing />} />
                 <Route path="contact" element={<Contact />} />
             </Route>
+            {/* 404 Fallback */}
+            <Route path="*" element={<NotFound />} />
         </Routes>
     );
 }

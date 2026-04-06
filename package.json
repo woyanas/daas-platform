@@ -1,0 +1,15 @@
+{
+  "name": "daas-platform",
+  "version": "1.0.0",
+  "description": "Production-ready, enterprise-grade dashboard platform with modular architecture.",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

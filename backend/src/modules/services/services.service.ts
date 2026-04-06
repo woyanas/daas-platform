@@ -1,7 +1,7 @@
 import { Injectable, NotFoundException } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
-import { Service, ServiceConfig } from "./entities/service.entity";
+import { Service, ServiceConfig, ServiceCategory } from "./entities/service.entity";
 
 @Injectable()
 export class ServicesService {
@@ -12,9 +12,13 @@ export class ServicesService {
     private serviceConfigsRepository: Repository<ServiceConfig>,
   ) {}
 
-  async findAll() {
+  async findAll(category?: ServiceCategory) {
+    const where: any = { isActive: true };
+    if (category) {
+      where.category = category;
+    }
     return this.servicesRepository.find({
-      where: { isActive: true },
+      where,
       order: { sortOrder: "ASC" },
     });
   }
@@ -58,13 +62,12 @@ export class ServicesService {
       config = this.serviceConfigsRepository.create({
         userId,
         serviceId,
-        isEnabled: data.isEnabled ?? true,
+        isEnabled: data.isEnabled ?? false,
         settings: data.settings ?? {},
       });
     } else {
       if (data.isEnabled !== undefined) config.isEnabled = data.isEnabled;
-      if (data.settings)
-        config.settings = { ...config.settings, ...data.settings };
+      if (data.settings !== undefined) config.settings = data.settings;
     }
 
     return this.serviceConfigsRepository.save(config);

@@ -16,14 +16,16 @@ docker exec -it daas-postgres psql -U daas_user -d daas_db -c "\\dt"
 
 ```
 database/
-├── migrations/          # SQL migration files (auto-run on startup)
+├── migrations/          # SQL migration files (auto-run on startup, includes schema and production/SDLC seed data)
 │   ├── 001_create_users.sql
 │   ├── 002_create_plans_subscriptions.sql
 │   ├── 003_create_services.sql
 │   ├── 004_create_dashboards_widgets.sql
 │   ├── 005_create_audit_contact.sql
-│   └── 006_create_refresh_tokens.sql
-├── seeds/               # Seed data scripts
+│   ├── 006_create_refresh_tokens.sql
+│   ├── 007_create_service_extensions_and_feature_tables.sql
+│   └── 008_seed_default_platform_data.sql
+├── seeds/               # Reserved for future separated seed scripts
 ├── docs/                # Documentation
 ├── docker-compose.yml   # PostgreSQL container
 └── README.md

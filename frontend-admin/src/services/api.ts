@@ -45,9 +45,55 @@ export const dashboardsApi = {
 
 export const servicesApi = {
     getAll: () => api.get('/services'),
+    getById: (id: string) => api.get(`/services/${id}`),
     getMyConfig: () => api.get('/services/my-config'),
     updateConfig: (id: string, data: any) => api.patch(`/services/${id}/config`, data),
     toggle: (id: string, isEnabled: boolean) => api.patch(`/services/${id}`, { isEnabled }),
+};
+
+export const connectorsApi = {
+    getAll: () => api.get('/services/connectors'),
+    getById: (id: string) => api.get(`/services/connectors/${id}`),
+    create: (data: any) => api.post('/services/connectors', data),
+    update: (id: string, data: any) => api.patch(`/services/connectors/${id}`, data),
+    remove: (id: string) => api.delete(`/services/connectors/${id}`),
+};
+
+export const widgetPacksApi = {
+    getAll: () => api.get('/services/widget-packs'),
+    getById: (id: string) => api.get(`/services/widget-packs/${id}`),
+    create: (data: any) => api.post('/services/widget-packs', data),
+    update: (id: string, data: any) => api.patch(`/services/widget-packs/${id}`, data),
+    remove: (id: string) => api.delete(`/services/widget-packs/${id}`),
+};
+
+export const alertsApi = {
+    getAll: () => api.get('/services/alerts'),
+    getById: (id: string) => api.get(`/services/alerts/${id}`),
+    create: (data: any) => api.post('/services/alerts', data),
+    update: (id: string, data: any) => api.patch(`/services/alerts/${id}`, data),
+    remove: (id: string) => api.delete(`/services/alerts/${id}`),
+};
+
+export const reportsApi = {
+    getAll: () => api.get('/services/reports'),
+    getById: (id: string) => api.get(`/services/reports/${id}`),
+    create: (data: any) => api.post('/services/reports', data),
+    update: (id: string, data: any) => api.patch(`/services/reports/${id}`, data),
+    download: (id: string) => api.get(`/services/reports/${id}/download`),
+};
+
+export const integrationsApi = {
+    getAll: () => api.get('/services/integrations'),
+    getById: (id: string) => api.get(`/services/integrations/${id}`),
+    create: (data: any) => api.post('/services/integrations', data),
+    update: (id: string, data: any) => api.patch(`/services/integrations/${id}`, data),
+    test: (id: string) => api.post(`/services/integrations/${id}/test`),
+};
+
+export const featureFlagsApi = {
+    getAll: () => api.get('/services/feature-flags'),
+    update: (id: string, data: any) => api.patch(`/services/feature-flags/${id}`, data),
 };
 
 export const subscriptionsApi = {

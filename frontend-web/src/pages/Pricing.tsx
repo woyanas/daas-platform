@@ -1,10 +1,14 @@
+import { useState } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { Check, X, Zap } from 'lucide-react';
+
+const ADMIN_URL = import.meta.env.VITE_ADMIN_URL || 'http://localhost:3002';
 
 const plans = [
     {
         name: 'Free',
-        price: 0,
+        priceMonthly: 0,
+        priceYearly: 0,
         description: 'Perfect for getting started',
         features: [
             { name: '5 Dashboards', included: true },
@@ -17,10 +21,12 @@ const plans = [
         ],
         cta: 'Get Started',
         popular: false,
+        salesLink: false,
     },
     {
         name: 'Pro',
-        price: 29,
+        priceMonthly: 29,
+        priceYearly: 23,
         description: 'For growing teams',
         features: [
             { name: 'Unlimited Dashboards', included: true },
@@ -33,10 +39,12 @@ const plans = [
         ],
         cta: 'Start Free Trial',
         popular: true,
+        salesLink: false,
     },
     {
         name: 'Enterprise',
-        price: 99,
+        priceMonthly: 99,
+        priceYearly: 79,
         description: 'For large organizations',
         features: [
             { name: 'Unlimited Everything', included: true },
@@ -49,6 +57,7 @@ const plans = [
         ],
         cta: 'Contact Sales',
         popular: false,
+        salesLink: true,
     },
 ];
 
@@ -72,21 +81,50 @@ const faqs = [
 ];
 
 export default function Pricing() {
+    const [isYearly, setIsYearly] = useState(false);
+
     return (
         <>
             <Helmet>
-                <title>Pricing - Platform</title>
+                <title>Pricing — DaaS Platform</title>
                 <meta name="description" content="Simple, transparent pricing for teams of all sizes. Start free and scale as you grow." />
             </Helmet>
 
             {/* Hero */}
-            <section className="pt-32 pb-20">
+            <section className="pt-32 pb-16">
                 <div className="max-w-7xl mx-auto px-6">
                     <div className="text-center">
                         <h1 className="text-3xl md:text-4xl font-bold text-dark-900 dark:text-white mb-6">Simple, Transparent Pricing 💳</h1>
-                        <p className="text-xl text-dark-600 dark:text-dark-300 max-w-2xl mx-auto">
+                        <p className="text-xl text-dark-600 dark:text-dark-300 max-w-2xl mx-auto mb-8">
                             Start free and scale as you grow. No hidden fees.
                         </p>
+
+                        {/* Billing Toggle */}
+                        <div className="inline-flex items-center gap-3 bg-dark-100 dark:bg-dark-800 rounded-full px-2 py-2 border border-dark-200 dark:border-dark-700">
+                            <button
+                                onClick={() => setIsYearly(false)}
+                                className={`px-4 py-1.5 rounded-full text-sm font-medium transition-all ${
+                                    !isYearly
+                                        ? 'bg-white dark:bg-dark-900 text-dark-900 dark:text-white shadow-sm'
+                                        : 'text-dark-500 dark:text-dark-400 hover:text-dark-700 dark:hover:text-dark-200'
+                                }`}
+                            >
+                                Monthly
+                            </button>
+                            <button
+                                onClick={() => setIsYearly(true)}
+                                className={`px-4 py-1.5 rounded-full text-sm font-medium transition-all flex items-center gap-2 ${
+                                    isYearly
+                                        ? 'bg-white dark:bg-dark-900 text-dark-900 dark:text-white shadow-sm'
+                                        : 'text-dark-500 dark:text-dark-400 hover:text-dark-700 dark:hover:text-dark-200'
+                                }`}
+                            >
+                                Yearly
+                                <span className="text-xs bg-emerald-100 dark:bg-emerald-900 text-emerald-700 dark:text-emerald-300 px-1.5 py-0.5 rounded-full font-semibold">
+                                    Save 20%
+                                </span>
+                            </button>
+                        </div>
                     </div>
                 </div>
             </section>
@@ -98,9 +136,9 @@ export default function Pricing() {
                         {plans.map((plan) => (
                             <div
                                 key={plan.name}
-                                className={`card relative bg-white dark:bg-dark-900 border rounded-2xl p-6 ${plan.popular
-                                        ? 'border-primary-500 shadow-md'
-                                        : 'border-dark-200 dark:border-dark-800'
+                                className={`card relative bg-white dark:bg-dark-900 border rounded-2xl p-6 transition-all duration-200 ${plan.popular
+                                        ? 'border-primary-500 shadow-lg shadow-primary-500/10'
+                                        : 'border-dark-200 dark:border-dark-800 hover:border-dark-300 dark:hover:border-dark-700'
                                     }`}
                             >
                                 {plan.popular && (
@@ -113,9 +151,16 @@ export default function Pricing() {
                                     <h3 className="text-xl font-bold text-dark-900 dark:text-white mb-2">{plan.name}</h3>
                                     <p className="text-dark-600 dark:text-dark-400 text-sm mb-4">{plan.description}</p>
                                     <div className="flex items-baseline justify-center gap-1">
-                                        <span className="text-5xl font-bold text-dark-900 dark:text-white">${plan.price}</span>
+                                        <span className="text-5xl font-bold text-dark-900 dark:text-white">
+                                            ${isYearly ? plan.priceYearly : plan.priceMonthly}
+                                        </span>
                                         <span className="text-dark-600 dark:text-dark-400">/month</span>
                                     </div>
+                                    {isYearly && plan.priceMonthly > 0 && (
+                                        <p className="text-xs text-dark-400 dark:text-dark-500 mt-1">
+                                            Billed ${plan.priceYearly * 12}/year
+                                        </p>
+                                    )}
                                 </div>
 
                                 <ul className="space-y-3 mb-8">
@@ -133,12 +178,21 @@ export default function Pricing() {
                                     ))}
                                 </ul>
 
-                                <a
-                                    href="http://localhost:3002/register"
-                                    className={`w-full block text-center ${plan.popular ? 'btn-primary' : 'btn-secondary'}`}
-                                >
-                                    {plan.cta}
-                                </a>
+                                {plan.salesLink ? (
+                                    <a
+                                        href="/contact"
+                                        className={`w-full block text-center ${plan.popular ? 'btn-primary' : 'btn-secondary'}`}
+                                    >
+                                        {plan.cta}
+                                    </a>
+                                ) : (
+                                    <a
+                                        href={`${ADMIN_URL}/register`}
+                                        className={`w-full block text-center ${plan.popular ? 'btn-primary' : 'btn-secondary'}`}
+                                    >
+                                        {plan.cta}
+                                    </a>
+                                )}
                             </div>
                         ))}
                     </div>

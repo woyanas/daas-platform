@@ -1,0 +1,19 @@
+{
+  "name": "daas-e2e-tests",
+  "version": "2.0.0",
+  "description": "Playwright E2E tests untuk DaaS Platform — UI, RBAC, & Real Scenarios",
+  "scripts": {
+    "test": "npx playwright test",
+    "test:web": "npx playwright test 01-frontend-web",
+    "test:admin": "npx playwright test 02-frontend-admin",
+    "test:rbac": "npx playwright test 03-rbac-roles",
+    "test:scenarios": "npx playwright test 04-real-scenarios",
+    "test:headed": "npx playwright test --headed",
+    "test:ui": "npx playwright test --ui",
+    "seed": "node setup-test-users.js",
+    "report": "npx playwright show-report playwright-report"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.43.0"
+  }
+}

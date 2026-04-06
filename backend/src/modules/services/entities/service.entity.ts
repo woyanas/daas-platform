@@ -9,6 +9,16 @@ import {
 } from "typeorm";
 import { User } from "../../users/entities/user.entity";
 
+export enum ServiceCategory {
+  CONNECTOR = "connector",
+  WIDGET = "widget",
+  ALERT = "alert",
+  REPORT = "report",
+  INTEGRATION = "integration",
+  FEATURE_FLAG = "feature_flag",
+  CORE = "core",
+}
+
 @Entity("services")
 export class Service {
   @PrimaryGeneratedColumn("uuid")
@@ -19,6 +29,9 @@ export class Service {
 
   @Column({ unique: true, length: 50 })
   slug: string;
+
+  @Column({ type: "enum", enum: ServiceCategory, default: ServiceCategory.CORE })
+  category: ServiceCategory;
 
   @Column({ nullable: true, type: "text" })
   description: string;

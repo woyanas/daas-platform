@@ -1,8 +1,11 @@
 import { Helmet } from 'react-helmet-async';
 import { Link } from 'react-router-dom';
 import {
-    ArrowRight, BarChart3, Layers, Zap, Shield
+    ArrowRight, BarChart3, Layers, Zap, Shield,
+    TrendingUp, Activity, Database, Users
 } from 'lucide-react';
+
+const ADMIN_URL = import.meta.env.VITE_ADMIN_URL || 'http://localhost:3002';
 
 const features = [
     {
@@ -34,11 +37,18 @@ const stats = [
     { value: '24/7', label: 'Expert Support' },
 ];
 
+const dashboardStats = [
+    { icon: Users, label: 'Active Users', value: '1,284', change: '+12%', color: 'text-primary-600 dark:text-primary-400' },
+    { icon: Activity, label: 'API Calls / min', value: '45.2K', change: '+23%', color: 'text-emerald-600 dark:text-emerald-400' },
+    { icon: Database, label: 'Data Stored', value: '2.3 TB', change: '+8%', color: 'text-blue-600 dark:text-blue-400' },
+    { icon: TrendingUp, label: 'Dashboards', value: '382', change: '+18%', color: 'text-violet-600 dark:text-violet-400' },
+];
+
 export default function Home() {
     return (
         <>
             <Helmet>
-                <title>Data Analytics Solutions & Software</title>
+                <title>DaaS Platform — AI-Driven Data Analytics for Industrial IoT</title>
                 <meta name="description" content="Transform your data into actionable insights with our advanced Big Data Analytics, Time-Series Intelligence, and AI-powered solutions." />
             </Helmet>
 
@@ -63,26 +73,100 @@ export default function Home() {
                         </p>
 
                         <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-                            <Link to="/pricing" className="btn-primary">
+                            <a href={`${ADMIN_URL}/register`} className="btn-primary">
                                 Start Free Trial
                                 <ArrowRight className="w-4 h-4 ml-2" />
-                            </Link>
+                            </a>
                             <Link to="/services" className="btn-secondary">
                                 See Features
                             </Link>
                         </div>
                     </div>
 
-                    {/* Dashboard Preview */}
+                    {/* Dashboard Preview — Animated mockup */}
                     <div className="mt-16">
-                        <div className="relative rounded-2xl overflow-hidden border border-dark-200 dark:border-dark-800 shadow-md">
-                            <div className="bg-dark-50 dark:bg-dark-900 p-8">
-                                <div className="grid grid-cols-3 gap-4 mb-4">
-                                    {[1, 2, 3].map((i) => (
-                                        <div key={i} className="bg-dark-200 dark:bg-dark-800 rounded-xl p-4 h-24" />
+                        <div className="relative rounded-2xl overflow-hidden border border-dark-200 dark:border-dark-800 shadow-2xl">
+                            {/* Browser chrome bar */}
+                            <div className="bg-dark-100 dark:bg-dark-800 px-4 py-3 flex items-center gap-2 border-b border-dark-200 dark:border-dark-700">
+                                <div className="flex gap-1.5">
+                                    <div className="w-3 h-3 rounded-full bg-red-400" />
+                                    <div className="w-3 h-3 rounded-full bg-yellow-400" />
+                                    <div className="w-3 h-3 rounded-full bg-green-400" />
+                                </div>
+                                <div className="flex-1 mx-4 h-5 rounded-md bg-dark-200 dark:bg-dark-700 flex items-center px-3">
+                                    <span className="text-xs text-dark-400 dark:text-dark-500">app.daas-platform.io/dashboard</span>
+                                </div>
+                            </div>
+
+                            {/* Dashboard content */}
+                            <div className="bg-dark-50 dark:bg-dark-900 p-6">
+                                {/* Stat cards */}
+                                <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-5">
+                                    {dashboardStats.map((s) => (
+                                        <div
+                                            key={s.label}
+                                            className="bg-white dark:bg-dark-800 rounded-xl p-4 border border-dark-100 dark:border-dark-700"
+                                        >
+                                            <div className="flex items-center justify-between mb-2">
+                                                <s.icon className={`w-4 h-4 ${s.color}`} />
+                                                <span className="text-xs font-medium text-emerald-600 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-900/20 px-1.5 py-0.5 rounded-full">
+                                                    {s.change}
+                                                </span>
+                                            </div>
+                                            <div className={`text-lg font-bold ${s.color}`}>{s.value}</div>
+                                            <div className="text-xs text-dark-400 dark:text-dark-500 mt-0.5">{s.label}</div>
+                                        </div>
                                     ))}
                                 </div>
-                                <div className="bg-dark-200 dark:bg-dark-800 rounded-xl p-4 h-48" />
+
+                                {/* Chart area mockup */}
+                                <div className="grid md:grid-cols-3 gap-3">
+                                    <div className="md:col-span-2 bg-white dark:bg-dark-800 rounded-xl p-4 border border-dark-100 dark:border-dark-700 h-40">
+                                        <div className="text-xs font-semibold text-dark-700 dark:text-dark-300 mb-3">📈 Data Throughput (real-time)</div>
+                                        {/* Fake sparkline */}
+                                        <svg viewBox="0 0 300 60" className="w-full h-20" preserveAspectRatio="none">
+                                            <defs>
+                                                <linearGradient id="sparkGrad" x1="0" y1="0" x2="0" y2="1">
+                                                    <stop offset="0%" stopColor="#4f46e5" stopOpacity="0.3" />
+                                                    <stop offset="100%" stopColor="#4f46e5" stopOpacity="0" />
+                                                </linearGradient>
+                                            </defs>
+                                            <path
+                                                d="M0,45 C20,40 40,30 60,35 C80,40 100,15 120,20 C140,25 160,10 180,15 C200,20 220,5 240,8 C260,11 280,18 300,12"
+                                                fill="none"
+                                                stroke="#4f46e5"
+                                                strokeWidth="2"
+                                            />
+                                            <path
+                                                d="M0,45 C20,40 40,30 60,35 C80,40 100,15 120,20 C140,25 160,10 180,15 C200,20 220,5 240,8 C260,11 280,18 300,12 L300,60 L0,60 Z"
+                                                fill="url(#sparkGrad)"
+                                            />
+                                        </svg>
+                                    </div>
+                                    <div className="bg-white dark:bg-dark-800 rounded-xl p-4 border border-dark-100 dark:border-dark-700 h-40">
+                                        <div className="text-xs font-semibold text-dark-700 dark:text-dark-300 mb-3">🥧 Data Sources</div>
+                                        <div className="space-y-2">
+                                            {[
+                                                { label: 'PostgreSQL', val: 65, color: 'bg-primary-500' },
+                                                { label: 'REST API', val: 22, color: 'bg-blue-400' },
+                                                { label: 'IoT Streams', val: 13, color: 'bg-emerald-400' },
+                                            ].map((item) => (
+                                                <div key={item.label}>
+                                                    <div className="flex justify-between text-xs text-dark-400 dark:text-dark-500 mb-1">
+                                                        <span>{item.label}</span>
+                                                        <span>{item.val}%</span>
+                                                    </div>
+                                                    <div className="h-1.5 bg-dark-100 dark:bg-dark-700 rounded-full overflow-hidden">
+                                                        <div
+                                                            className={`h-full ${item.color} rounded-full`}
+                                                            style={{ width: `${item.val}%` }}
+                                                        />
+                                                    </div>
+                                                </div>
+                                            ))}
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -123,7 +207,7 @@ export default function Home() {
                         {features.map((feature) => (
                             <div
                                 key={feature.title}
-                                className="card bg-white dark:bg-dark-900 border border-dark-200 dark:border-dark-800 p-6 rounded-2xl"
+                                className="card bg-white dark:bg-dark-900 border border-dark-200 dark:border-dark-800 p-6 rounded-2xl hover:border-primary-300 dark:hover:border-primary-700 transition-all duration-200 hover:shadow-md"
                             >
                                 <div className="w-12 h-12 rounded-xl bg-primary-100 dark:bg-primary-900 flex items-center justify-center mb-4">
                                     <feature.icon className="w-6 h-6 text-primary-600 dark:text-primary-400" />
@@ -146,7 +230,7 @@ export default function Home() {
                             Request a demo or start your free trial today.
                         </p>
                         <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-                            <a href="http://localhost:3002/register" className="btn-primary">
+                            <a href={`${ADMIN_URL}/register`} className="btn-primary">
                                 Start Free Trial
                                 <ArrowRight className="w-4 h-4 ml-2" />
                             </a>

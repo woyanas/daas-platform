@@ -2,6 +2,8 @@ import { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Menu, X, LayoutDashboard } from 'lucide-react';
 
+const ADMIN_URL = import.meta.env.VITE_ADMIN_URL || 'http://localhost:3002';
+
 const navLinks = [
     { name: 'Home', path: '/' },
     { name: 'About', path: '/about' },
@@ -24,7 +26,7 @@ export default function Header() {
                             <div className="w-10 h-10 rounded-xl bg-primary-600 flex items-center justify-center">
                                 <LayoutDashboard className="w-5 h-5 text-white" />
                             </div>
-                            <span className="text-xl font-bold text-dark-900 dark:text-white">Platform</span>
+                            <span className="text-xl font-bold text-dark-900 dark:text-white">DaaS Platform</span>
                         </Link>
 
                         {/* Desktop Navigation */}
@@ -45,10 +47,10 @@ export default function Header() {
 
                         {/* CTA Buttons */}
                         <div className="hidden md:flex items-center gap-4">
-                            <a href="http://localhost:3002" className="btn-secondary text-sm">
+                            <a href={`${ADMIN_URL}`} className="btn-secondary text-sm">
                                 Login
                             </a>
-                            <a href="http://localhost:3002/register" className="btn-primary text-sm">
+                            <a href={`${ADMIN_URL}/register`} className="btn-primary text-sm">
                                 Get Started
                             </a>
                         </div>
@@ -57,6 +59,7 @@ export default function Header() {
                         <button
                             onClick={() => setIsOpen(!isOpen)}
                             className="md:hidden p-2 text-dark-600 dark:text-dark-300 hover:text-dark-900 dark:hover:text-white"
+                            aria-label="Toggle menu"
                         >
                             {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
                         </button>
@@ -82,10 +85,10 @@ export default function Header() {
                             </Link>
                         ))}
                         <div className="pt-4 space-y-2">
-                            <a href="http://localhost:3002" className="btn-secondary w-full text-sm">
+                            <a href={`${ADMIN_URL}`} className="btn-secondary w-full text-sm">
                                 Login
                             </a>
-                            <a href="http://localhost:3002/register" className="btn-primary w-full text-sm">
+                            <a href={`${ADMIN_URL}/register`} className="btn-primary w-full text-sm">
                                 Get Started
                             </a>
                         </div>

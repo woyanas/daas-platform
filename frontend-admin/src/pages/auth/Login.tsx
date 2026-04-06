@@ -96,6 +96,8 @@ export default function Login() {
                                 <input
                                     type="email"
                                     id="email"
+                                    name="email"
+                                    autoComplete="username"
                                     value={email}
                                     onChange={(e) => setEmail(e.target.value)}
                                     className={`w-full pl-12 pr-4 py-3 rounded-lg border-2 transition-all duration-300 focus:outline-none ${
@@ -123,6 +125,8 @@ export default function Login() {
                                 <input
                                     type="password"
                                     id="password"
+                                    name="password"
+                                    autoComplete="current-password"
                                     value={password}
                                     onChange={(e) => setPassword(e.target.value)}
                                     className={`w-full pl-12 pr-4 py-3 rounded-lg border-2 transition-all duration-300 focus:outline-none ${

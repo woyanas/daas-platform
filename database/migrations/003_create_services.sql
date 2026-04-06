@@ -5,6 +5,7 @@ CREATE TABLE services (
     id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
     name VARCHAR(100) NOT NULL,
     slug VARCHAR(50) UNIQUE NOT NULL,
+    category VARCHAR(50) NOT NULL DEFAULT 'core',
     description TEXT,
     icon VARCHAR(100),
     is_active BOOLEAN DEFAULT true,

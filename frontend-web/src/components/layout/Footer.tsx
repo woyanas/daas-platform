@@ -38,7 +38,7 @@ export default function Footer() {
                             <div className="w-10 h-10 rounded-xl bg-primary-600 flex items-center justify-center">
                                 <LayoutDashboard className="w-5 h-5 text-white" />
                             </div>
-                            <span className="text-xl font-bold text-dark-900 dark:text-white">Platform</span>
+                            <span className="text-xl font-bold text-dark-900 dark:text-white">DaaS Platform</span>
                         </Link>
                         <p className="text-dark-600 dark:text-dark-400 text-sm mb-6">
                             Leading provider of data analytics solutions and software. Transform your data into actionable insights with our advanced analytics platform.
@@ -125,7 +125,7 @@ export default function Footer() {
                 {/* Bottom */}
                 <div className="mt-16 pt-8 border-t border-dark-200 dark:border-dark-800 flex flex-col md:flex-row items-center justify-between gap-4">
                     <p className="text-sm text-dark-600 dark:text-dark-500">
-                        © {new Date().getFullYear()} Platform. All rights reserved.
+                        © {new Date().getFullYear()} DaaS Platform. All rights reserved.
                     </p>
                     <p className="text-sm text-dark-600 dark:text-dark-500">
                         Made with ❤️ for developers and businesses

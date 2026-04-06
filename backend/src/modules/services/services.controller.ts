@@ -6,10 +6,12 @@ import {
   Body,
   UseGuards,
   Req,
+  Query,
 } from "@nestjs/common";
 import { ApiTags, ApiOperation, ApiBearerAuth } from "@nestjs/swagger";
 import { ServicesService } from "./services.service";
 import { JwtAuthGuard } from "../auth/guards/jwt-auth.guard";
+import { ServiceCategory } from "./entities/service.entity";
 
 @ApiTags("services")
 @Controller("services")
@@ -20,8 +22,8 @@ export class ServicesController {
 
   @Get()
   @ApiOperation({ summary: "Get all available services" })
-  findAll() {
-    return this.servicesService.findAll();
+  findAll(@Query("category") category?: ServiceCategory) {
+    return this.servicesService.findAll(category);
   }
 
   @Get("my-config")
